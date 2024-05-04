@@ -38,7 +38,6 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 200) {
-        // Save tokens to shared preferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('access_token', response.data['access']);
         await prefs.setString('refresh_token', response.data['refresh']);
@@ -70,6 +69,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isTabletOrLaptop = MediaQuery.of(context).size.width >= 600;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 18, right: 18),
@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 70),
             Image.asset(
               'assets/images/herb1.png',
-              height: 100,
+              height: isTabletOrLaptop ? 130 : 100,
             ),
             const SizedBox(height: 20),
             const Text('Raqamli Maxalla Portali'),

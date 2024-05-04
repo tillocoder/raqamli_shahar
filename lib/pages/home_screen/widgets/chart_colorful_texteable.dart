@@ -6,6 +6,7 @@ class ChartText extends StatelessWidget {
   final IconData icon;
   final int data;
   final VoidCallback? onTap;
+  final double width;
 
   const ChartText({
     Key? key,
@@ -14,6 +15,7 @@ class ChartText extends StatelessWidget {
     required this.icon,
     required this.data,
     this.onTap,
+    required this.width,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,7 @@ class ChartText extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: SizedBox(
-        width: double.infinity,
+        width: width,
         height: 60,
         child: DecoratedBox(
           decoration: BoxDecoration(
@@ -40,7 +42,7 @@ class ChartText extends StatelessWidget {
                 text,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 17,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -49,7 +51,7 @@ class ChartText extends StatelessWidget {
                 '$data',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 17,
                   fontWeight: FontWeight.w700,
                 ),
               ),

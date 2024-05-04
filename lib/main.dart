@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tamorqa_app/pages/home_screen/home_page.dart';
+import 'package:tamorqa_app/pages/splash.dart';
 
 import 'pages/login_screen/login.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: accessToken.isNotEmpty ? const HomePage() : const LoginPage(),
+      home: accessToken.isNotEmpty ? const Splash() : const LoginPage(),
     );
   }
 }

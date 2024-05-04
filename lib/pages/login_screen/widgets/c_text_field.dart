@@ -4,23 +4,32 @@ class CTextField extends StatelessWidget {
   final TextEditingController ctr;
   final String hintString;
   final TextInputType inputTypes;
+  final double width; // Width of the CTextField
+
   const CTextField({
-    super.key,
+    Key? key,
     required this.ctr,
     required this.hintString,
     required this.inputTypes,
-  });
+    this.width = double.infinity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      keyboardType: inputTypes,
-      controller: ctr,
-      decoration: InputDecoration(
-        enabled: true,
-        hintText: hintString,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
+    final isTabletOrLaptop = MediaQuery.of(context).size.width >= 600;
+
+    return Center(
+      child: SizedBox(
+        width: isTabletOrLaptop ? 400 : width,
+        child: TextField(
+          controller: ctr,
+          keyboardType: inputTypes,
+          decoration: InputDecoration(
+            hintText: hintString,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
         ),
       ),
     );

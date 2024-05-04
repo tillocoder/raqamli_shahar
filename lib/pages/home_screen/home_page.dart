@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:graphic/graphic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tamorqa_app/citizens/citizen_screen.dart';
 import 'package:tamorqa_app/domain/models/user_list.dart';
 
 import 'widgets/chart_colorful_texteable.dart';
@@ -14,9 +15,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-String accessToken = '';
-String refreshToken = '';
-
 class _HomePageState extends State<HomePage> {
   Future<void> loadTokens() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -25,6 +23,9 @@ class _HomePageState extends State<HomePage> {
       refreshToken = prefs.getString('refresh_token') ?? '';
     });
   }
+
+  String accessToken = '';
+  String refreshToken = '';
 
   Dio dio = Dio();
   List<UsersList> userList = [];
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         'http://mahalla.ijro-app.uz/api/v1/citizen/list/',
         options: Options(
           headers: {
-            'Authorization': 'Bearer $accessToken',
+            'Authorization': 'Bearer $refreshToken',
           },
         ),
       );
@@ -69,14 +70,35 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      drawer: const Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+                child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Hikmatillo Rahmonjonov',
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            )),
+          ],
+        ),
+      ),
       appBar: AppBar(
+        backgroundColor: Colors.grey.shade100,
         title: const Text('Mahalla ijro'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Text(accessToken),
             Container(
               margin: const EdgeInsets.only(top: 10),
               width: 350,
@@ -127,51 +149,47 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
+                  const Row(
+                    children: [
+                      Expanded(
+                        child: ChartText(
+                          text: 'Ayollar',
+                          colors: Colors.orange,
+                          icon: Icons.woman,
+                          data: 0,
+                          width: 100,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: ChartText(
+                          text: 'Erkaklar',
+                          colors: Colors.green,
+                          icon: Icons.person,
+                          data: 0,
+                          width: 100,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   ChartText(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (ctx) => const CitizensList()),
+                      );
+                    },
                     text: 'Fuqarolar',
                     colors: Colors.indigo,
                     icon: Icons.people_alt,
-                    data: userList.length,
-                  ),
-                  const SizedBox(height: 10),
-                  const ChartText(
-                    text: 'Erkaklar',
-                    colors: Colors.green,
-                    icon: Icons.person,
                     data: 0,
-                  ),
-                  const SizedBox(height: 10),
-                  const ChartText(
-                    text: 'Ayollar',
-                    colors: Colors.orange,
-                    icon: Icons.woman,
-                    data: 0,
+                    width: double.infinity,
                   ),
                 ],
               ),
             ),
-            // SizedBox(
-            //   height: 200,
-            //   child: ListView.separated(
-            //     separatorBuilder: (context, index) =>
-            //         const SizedBox(height: 10),
-            //     itemBuilder: (context, index) {
-            //       final user = userList[index];
-            //       return Container(
-            //         height: 40,
-            //         color: Colors.green,
-            //         child: Row(
-            //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //           children: [
-            //             Text('ID: ${user.id}'),
-            //             Text('Name: ${user.fio}'),
-            //           ],
-            //         ),
-            //       );
-            //     },
-            //     itemCount: userList.length,
-            //   ),
-            // )
           ],
         ),
       ),
