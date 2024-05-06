@@ -14,8 +14,8 @@ class CitizenModel {
   final int gender;
   final String fio;
   final String address;
-  final String lat;
-  final String lng;
+  final String? lat;
+  final String? lng;
 
   CitizenModel({
     required this.personalIdentification,

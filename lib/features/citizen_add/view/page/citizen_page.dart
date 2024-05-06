@@ -4,13 +4,7 @@ import 'package:tamorqa_app/core/services/citizen/citizen_create.dart';
 import 'package:tamorqa_app/data/entity/citizen_model.dart';
 import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
 import 'package:tamorqa_app/features/citizen_add/controller/citizen_add_ctr.dart';
-
-TextEditingController pinflCtr = TextEditingController();
-TextEditingController phoneNumber = TextEditingController();
-TextEditingController houseNumber = TextEditingController();
-TextEditingController gender = TextEditingController();
-TextEditingController fioCtr = TextEditingController();
-TextEditingController address = TextEditingController();
+import 'package:tamorqa_app/features/citizen_add/controller/golocator.dart';
 
 class CitizenAddOrEditScreen extends ConsumerWidget {
   const CitizenAddOrEditScreen({super.key});
@@ -18,7 +12,9 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(citizenAdctr);
+    ref.watch(mylocationController);
     var ctr = ref.read(citizenAdctr);
+    var ctrLocation = ref.read(mylocationController);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Uzgartirish'),
@@ -30,7 +26,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
             children: [
               const Text('PINFL:'),
               CTextField(
-                ctr: pinflCtr,
+                ctr: ctr.pinflCtr,
                 hintString: 'Pinfl',
                 inputTypes: TextInputType.text,
                 validator: (value) {},
@@ -38,7 +34,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               const Text('Uy raqami:'),
               CTextField(
-                ctr: houseNumber,
+                ctr: ctr.houseNumber,
                 hintString: 'Uy raqami:',
                 inputTypes: TextInputType.number,
                 validator: (value) {},
@@ -46,7 +42,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               const Text('Telefon:'),
               CTextField(
-                ctr: phoneNumber,
+                ctr: ctr.phoneNumber,
                 hintString: 'Telefon',
                 inputTypes: TextInputType.text,
                 validator: (value) {},
@@ -54,7 +50,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               const Text('Jinsi:'),
               CTextField(
-                ctr: gender,
+                ctr: ctr.gender,
                 hintString: 'Jinsi',
                 inputTypes: TextInputType.text,
                 validator: (value) {},
@@ -62,7 +58,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               const Text('FIO:'),
               CTextField(
-                ctr: fioCtr,
+                ctr: ctr.fioCtr,
                 hintString: 'FIO',
                 inputTypes: TextInputType.text,
                 validator: (value) {},
@@ -70,7 +66,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               const Text('Address:'),
               CTextField(
-                ctr: address,
+                ctr: ctr.address,
                 hintString: 'Address',
                 inputTypes: TextInputType.text,
                 validator: (value) {},
@@ -85,7 +81,20 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ElevatedButton(
-            onPressed: ctr.isLoading ? null : postNewCitizen,
+            onPressed: () async {
+              ctrLocation.joylashuvniAniqlash();
+              final newCitizen = CitizenModel(
+                personalIdentification: ctr.pinflCtr.text,
+                house: int.parse(ctr.houseNumber.text),
+                phone: ctr.phoneNumber.text,
+                gender: int.parse(ctr.gender.text),
+                fio: ctr.fioCtr.text,
+                address: ctr.fioCtr.text,
+                lat: '324324',
+                lng: '342324',
+              );
+              await CitizenCreateService.postCreatCitezen(newCitizen);
+            },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
@@ -95,7 +104,7 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
             ),
             child: Text(
               ctr.isLoading ? 'Saqlanmoqda...' : 'Saqlash',
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
         ),
@@ -103,29 +112,29 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
     );
   }
 }
-
-void postNewCitizen() async {
-  final pinfl = pinflCtr.text.toString();
-  final houseNum = houseNumber.text.toString();
-  final phone = phoneNumber.text.toString();
-  final gen = gender.text.toString();
-  final fio = fioCtr.text.toString();
-  final addr = address.text.toString();
-
-  final newCitizen = CitizenModel(
-    personalIdentification: pinfl,
-    house: houseNum as int,
-    phone: phone,
-    gender: gen as int,
-    fio: fio,
-    address: addr,
-    lat: '3242322422',
-    lng: '5423422321',
-  );
-
-  try {
-    await CitizenCreateService.postCreatCitezen(newCitizen);
-  } catch (error) {
-    print('Error occurred while creating citizen: $error');
-  }
-}
+//
+// void postNewCitizen() async {
+//   final pinfl = ctr.pinflCtr.text;
+//   final houseNum = houseNumber.text.toString();
+//   final phone = phoneNumber.text.toString();
+//   final gen = gender.text.toString();
+//   final fio = fioCtr.text.toString();
+//   final addr = address.text.toString();
+//
+//   final newCitizen = CitizenModel(
+//     personalIdentification: pinfl,
+//     house: houseNum,
+//     phone: phone,
+//     gender: gen,
+//     fio: fio,
+//     address: addr,
+//     lat: '3242322422',
+//     lng: '5423422321',
+//   );
+//
+//   try {
+//     await CitizenCreateService.postCreatCitezen(newCitizen);
+//   } catch (error) {
+//     print('Error occurred while creating citizen: $error');
+//   }
+// }

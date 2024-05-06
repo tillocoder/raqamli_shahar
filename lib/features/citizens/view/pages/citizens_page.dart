@@ -11,8 +11,9 @@ class CitizensPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(activitiesController);
-    var ctr = ref.read(activitiesController);
+    // var ctr = ref.read(activitiesController);
     return Scaffold(
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: const Text('Fuqarolar'),
       ),
@@ -20,16 +21,47 @@ class CitizensPage extends ConsumerWidget {
         itemCount: CitizenGetListServices.citizen.length,
         itemBuilder: (context, index) {
           var item = CitizenGetListServices.citizen[index];
-          return Card(
-            child: ListTile(
-              onTap: () {
-                context.goNamed(Routes.activities);
-              },
-              title: Text(item.fio),
-              trailing: Icon(
-                item.gender == 1 ? Icons.girl_outlined : Icons.boy,
-                color: item.gender == 1 ? Colors.green : Colors.indigoAccent,
-                size: 28,
+          return Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade300,
+                    offset: const Offset(1, 1),
+                    spreadRadius: 10,
+                    blurRadius: 10,
+                  )
+                ],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              height: 70,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          item.fio,
+                          style: const TextStyle(
+                            fontSize: 17,
+                          ),
+                        ),
+                        Text(
+                          "${item.house.toString()}",
+                          style: const TextStyle(fontSize: 17),
+                        ),
+                      ],
+                    ),
+                    Text(item.phone),
+                  ],
+                ),
               ),
             ),
           );

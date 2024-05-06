@@ -11,6 +11,13 @@ class CitizenAddController extends ChangeNotifier {
     init();
   }
 
+  TextEditingController pinflCtr = TextEditingController();
+  TextEditingController phoneNumber = TextEditingController();
+  TextEditingController houseNumber = TextEditingController();
+  TextEditingController gender = TextEditingController();
+  TextEditingController fioCtr = TextEditingController();
+  TextEditingController address = TextEditingController();
+
   void init() async {
     isLoading = true;
     notifyListeners();
