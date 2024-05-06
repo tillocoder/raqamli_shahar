@@ -1,5 +1,6 @@
 sealed class Urls {
   static const baseUrl = 'http://mahalla.ijro-app.uz';
+  static const apirefresh = '/api/token/refresh/';
   static const apiToken = '/api/token/';
   static const apiRefresh = '/api/token/refresh/';
   static const apiActivities = '/api/v1/citizen/activities/'; //! :id/
