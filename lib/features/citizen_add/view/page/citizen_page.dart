@@ -105,18 +105,18 @@ class CitizenAddOrEditScreen extends ConsumerWidget {
 }
 
 void postNewCitizen() async {
-  final pinfl = 'terasd';
-  final houseNum = houseNumber.text;
-  final phone = phoneNumber.text;
-  final gen = gender.text;
-  final fio = fioCtr.text;
-  final addr = address.text;
+  final pinfl = pinflCtr.text.toString();
+  final houseNum = houseNumber.text.toString();
+  final phone = phoneNumber.text.toString();
+  final gen = gender.text.toString();
+  final fio = fioCtr.text.toString();
+  final addr = address.text.toString();
 
   final newCitizen = CitizenModel(
     personalIdentification: pinfl,
-    house: houseNum,
+    house: houseNum as int,
     phone: phone,
-    gender: gen,
+    gender: gen as int,
     fio: fio,
     address: addr,
     lat: '3242322422',

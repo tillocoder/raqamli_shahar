@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:tamorqa_app/core/services/app_urls/urls.dart';
 import 'package:tamorqa_app/core/services/base_options/base_options.dart';
 import 'package:tamorqa_app/data/entity/citizen_model.dart';
@@ -7,21 +6,20 @@ import 'package:tamorqa_app/data/entity/citizen_model.dart';
 class CitizenGetListServices {
   static Dio dio = Dio(Baseoption.baseOptionsT);
   static List<CitizenModel> citizen = [];
-  static Future<void> getCitezenList() async {
-    var response = await dio.get(Urls.apiCitizenList);
+
+  static Future<void> getCitizenList() async {
     try {
+      final response = await dio.get(Urls.apiCitizenList);
       if (response.statusCode == 200 || response.statusCode == 201) {
         print(response.data);
         citizen = (response.data as List)
             .map(
-              (e) => CitizenModel.fromJson(e),
+              (json) => CitizenModel.fromJson(json),
             )
-            .toList()
-            .reversed
             .toList();
       }
     } catch (e) {
-      debugPrint('Exception ${response.statusCode}');
+      print('Exception: $e');
     }
   }
 }

@@ -1,16 +1,23 @@
+// To parse this JSON data, do
+//     final citizenModel = citizenModelFromJson(jsonString);
+import 'dart:convert';
+
+CitizenModel citizenModelFromJson(String str) =>
+    CitizenModel.fromJson(json.decode(str));
+
+String citizenModelToJson(CitizenModel data) => json.encode(data.toJson());
+
 class CitizenModel {
-  final int? id;
-  final dynamic personalIdentification;
-  final String house;
+  final String personalIdentification;
+  final int house;
   final String phone;
-  final String gender;
+  final int gender;
   final String fio;
   final String address;
   final String lat;
   final String lng;
 
   CitizenModel({
-    this.id,
     required this.personalIdentification,
     required this.house,
     required this.phone,
@@ -22,8 +29,7 @@ class CitizenModel {
   });
 
   factory CitizenModel.fromJson(Map<String, dynamic> json) => CitizenModel(
-        id: json["id"],
-        personalIdentification: json["personalIdentification"],
+        personalIdentification: json["personal_identification"],
         house: json["house"],
         phone: json["phone"],
         gender: json["gender"],
@@ -34,7 +40,7 @@ class CitizenModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "personalIdentification": personalIdentification,
+        "personal_identification": personalIdentification,
         "house": house,
         "phone": phone,
         "gender": gender,
@@ -43,9 +49,4 @@ class CitizenModel {
         "lat": lat,
         "lng": lng,
       };
-
-  @override
-  String toString() {
-    return 'Citizen { id: $id, personalIdentification: $personalIdentification, house: $house, phone: $phone, gender: $gender, fio: $fio, address: $address }';
-  }
 }

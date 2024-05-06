@@ -17,7 +17,7 @@ class ActivitiesController extends ChangeNotifier {
   void init() async {
     isLoading = false;
     await ActivitiesGetListServices.getactivitiesList(id);
-    await CitizenGetListServices.getCitezenList();
+    await CitizenGetListServices.getCitizenList();
     isLoading = true;
     notifyListeners();
   }

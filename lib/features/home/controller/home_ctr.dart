@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 
-final homeController = ChangeNotifierProvider.autoDispose((ref) => HomeController());
+final homeController =
+    ChangeNotifierProvider.autoDispose((ref) => HomeController());
 
 class HomeController extends ChangeNotifier {
   bool isLoading = true;
@@ -12,7 +13,7 @@ class HomeController extends ChangeNotifier {
 
   void init() async {
     isLoading = false;
-    await CitizenGetListServices.getCitezenList();
+    await CitizenGetListServices.getCitizenList();
     isLoading = true;
     notifyListeners();
   }
