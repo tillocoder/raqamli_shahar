@@ -18,8 +18,16 @@ class CitizenAddController extends ChangeNotifier {
   TextEditingController fioCtr = TextEditingController();
   TextEditingController address = TextEditingController();
 
-  void setSelectedGender(int? gender) {
-    selectedGender = gender;
+  void setSelectedGender(int? newValue) {
+    switch (newValue) {
+      case 1:
+        selectedGender = 1;
+        break;
+      case 2:
+        selectedGender = 2;
+        break;
+    }
+    debugPrint(selectedGender.toString());
     notifyListeners();
   }
 

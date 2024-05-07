@@ -58,17 +58,17 @@ class CitizenAddScreen extends ConsumerWidget {
               const SizedBox(height: 10),
               const Text('Gender:'),
               DropdownButton<int>(
-                value: ref.watch(citizenAdctr).selectedGender,
+                value: ctr.selectedGender,
                 onChanged: (newValue) {
-                  ref.read(citizenAdctr).setSelectedGender(newValue);
+                  ctr.setSelectedGender(newValue);
                 },
                 items: const [
                   DropdownMenuItem<int>(
-                    value: 1,
+                    value: 2,
                     child: Text('Ayol'),
                   ),
                   DropdownMenuItem<int>(
-                    value: 2,
+                    value: 1,
                     child: Text('Erkak'),
                   ),
                 ],
