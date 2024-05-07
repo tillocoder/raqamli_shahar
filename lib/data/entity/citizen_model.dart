@@ -1,34 +1,38 @@
 // To parse this JSON data, do
+//
 //     final citizenModel = citizenModelFromJson(jsonString);
+
 import 'dart:convert';
 
-CitizenModel citizenModelFromJson(String str) =>
-    CitizenModel.fromJson(json.decode(str));
+List<CitizenModel> citizenModelFromJson(String str) => List<CitizenModel>.from(json.decode(str).map((x) => CitizenModel.fromJson(x)));
 
-String citizenModelToJson(CitizenModel data) => json.encode(data.toJson());
+String citizenModelToJson(List<CitizenModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class CitizenModel {
-  final String personalIdentification;
-  final int house;
-  final String phone;
-  final int gender;
-  final String fio;
-  final String address;
-  final String? lat;
-  final String? lng;
+    final int? id;
+    final String personalIdentification;
+    final int house;
+    final String phone;
+    final int gender;
+    final String fio;
+    final String address;
+    final String lat;
+    final String lng;
 
-  CitizenModel({
-    required this.personalIdentification,
-    required this.house,
-    required this.phone,
-    required this.gender,
-    required this.fio,
-    required this.address,
-    required this.lat,
-    required this.lng,
-  });
+    CitizenModel({
+        required this.id,
+        required this.personalIdentification,
+        required this.house,
+        required this.phone,
+        required this.gender,
+        required this.fio,
+        required this.address,
+        required this.lat,
+        required this.lng,
+    });
 
-  factory CitizenModel.fromJson(Map<String, dynamic> json) => CitizenModel(
+    factory CitizenModel.fromJson(Map<String, dynamic> json) => CitizenModel(
+        id: json["id"],
         personalIdentification: json["personal_identification"],
         house: json["house"],
         phone: json["phone"],
@@ -37,9 +41,10 @@ class CitizenModel {
         address: json["address"],
         lat: json["lat"],
         lng: json["lng"],
-      );
+    );
 
-  Map<String, dynamic> toJson() => {
+    Map<String, dynamic> toJson() => {
+        "id": id,
         "personal_identification": personalIdentification,
         "house": house,
         "phone": phone,
@@ -48,5 +53,5 @@ class CitizenModel {
         "address": address,
         "lat": lat,
         "lng": lng,
-      };
+    };
 }

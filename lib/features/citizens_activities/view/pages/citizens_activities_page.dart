@@ -1,29 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
+import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
 
 class CitezensActivities extends ConsumerWidget {
   const CitezensActivities({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(activitiesController);
-    // ignore: unused_local_variable
-    var ctr = ref.read(activitiesController);
-    return const Scaffold(body: const Text('Tamirlash')
-        //  ctr.isLoading
-        //     ? ListView.builder(
-        //         itemCount: ActivitiesGetListServices.activities[0].citizen.length,
-        //         itemBuilder: (context, index) {
-        //           var itam = ActivitiesGetListServices.activities[0].citizen[index];
-        //           return ListTile(
-        //             title: Text(itam.executionTime),
-        //           );
-        //         },
-        //       )
-        //     : Center(
-        //         child: CircularProgressIndicator(),
-        //       ),
+    return Scaffold(
+        body: ListView.builder(
+      itemCount: ActivitiesGetListServices.activities.length,
+      itemBuilder: (context, index) {
+        var itam = ActivitiesGetListServices.activities[index];
+        return ListTile(
+          title: Text(itam.direction.toString()),
         );
+      },
+    ));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
+import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
 class CitizensPage extends ConsumerWidget {
@@ -32,6 +33,11 @@ class CitizensPage extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: ListTile(
+                onTap: () async {
+                  await ActivitiesGetListServices.getactivitiesList(item.id!);
+                  // ignore: use_build_context_synchronously
+                  context.goNamed(Routes.activities);
+                },
                 title: Text(item.fio),
                 subtitle: Text(
                   "Tel: ${item.phone}",
