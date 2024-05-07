@@ -16,4 +16,5 @@ sealed class Routes {
   static const String citizens = 'home/citizens';
   static const String activities = 'home/citizens/activities';
   static const String citizenAdd = 'home/citizens/citizenAdd';
+  static const String citizenSearch = 'home/citizens/citizenSearch';
 }

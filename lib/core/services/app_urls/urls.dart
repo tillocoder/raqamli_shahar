@@ -8,4 +8,6 @@ sealed class Urls {
   static const apiCitizenList = '/api/v1/citizen/list/';
   static const apiCitizenUpdate = '/api/v1/citizen/update/'; //! :id/
   static const apiDirectionList = '/api/v1/direction/list/';
+  static const apiSearchCitizen =
+      'http://mahalla.ijro-app.uz/api/v1/citizen/search/?q=sardor';
 }

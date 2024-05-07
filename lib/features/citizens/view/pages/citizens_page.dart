@@ -12,18 +12,24 @@ class CitizensPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(activitiesController);
-    // var ctr = ref.read(activitiesController);
+    var ctr = ref.read(activitiesController);
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: const Text('Fuqarolar'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search_sharp),
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: CitizenGetListServices.citizen.length,
         itemBuilder: (context, index) {
           var item = CitizenGetListServices.citizen[index];
           return Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
             child: Card(
               color: Colors.white,
               elevation: 6,

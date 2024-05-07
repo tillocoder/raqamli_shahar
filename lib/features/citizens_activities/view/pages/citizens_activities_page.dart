@@ -8,14 +8,17 @@ class CitezensActivities extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-        body: ListView.builder(
-      itemCount: ActivitiesGetListServices.activities.length,
-      itemBuilder: (context, index) {
-        var itam = ActivitiesGetListServices.activities[index];
-        return ListTile(
-          title: Text(itam.direction.toString()),
-        );
-      },
-    ));
+      body: ListView.builder(
+        itemCount: ActivitiesGetListServices.activities.length,
+        itemBuilder: (context, index) {
+          var itam = ActivitiesGetListServices.activities[index];
+          return ListTile(
+            title: Text(
+              itam.direction.toString(),
+            ),
+          );
+        },
+      ),
+    );
   }
 }

@@ -14,6 +14,7 @@ class CitizenAddController extends ChangeNotifier {
   TextEditingController pinflCtr = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController houseNumber = TextEditingController();
+  TextEditingController passportNumber = TextEditingController();
   int? selectedGender;
   TextEditingController fioCtr = TextEditingController();
   TextEditingController address = TextEditingController();

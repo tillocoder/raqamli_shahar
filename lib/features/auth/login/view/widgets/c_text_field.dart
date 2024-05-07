@@ -5,15 +5,17 @@ class CTextField extends StatelessWidget {
   final String hintString;
   final TextInputType inputTypes;
   final double width;
+  final int maxLines;
 
   const CTextField({
-    Key? key,
+    super.key,
     required this.ctr,
     required this.hintString,
     required this.inputTypes,
     this.width = double.infinity,
+    required this.maxLines,
     required String? Function(dynamic value) validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class CTextField extends StatelessWidget {
       child: SizedBox(
         width: isTabletOrLaptop ? 400 : width,
         child: TextField(
+          maxLength: maxLines,
           controller: ctr,
           keyboardType: inputTypes,
           decoration: InputDecoration(

@@ -34,28 +34,32 @@ class LoginPage extends ConsumerWidget {
                 Text(Words.digital.tr(context)),
                 const SizedBox(height: 70),
                 CTextField(
-                    ctr: ctr.loginCtr,
-                    hintString: 'Login',
-                    inputTypes: TextInputType.text,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter your login";
-                      } else {
-                        return null;
-                      }
-                    }),
+                  ctr: ctr.loginCtr,
+                  hintString: 'Login',
+                  inputTypes: TextInputType.text,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter your login";
+                    } else {
+                      return null;
+                    }
+                  },
+                  maxLines: 30,
+                ),
                 const SizedBox(height: 20),
                 CTextField(
-                    ctr: ctr.passwordCtr,
-                    hintString: 'Password',
-                    inputTypes: TextInputType.text,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "Please enter your password";
-                      } else {
-                        return null;
-                      }
-                    }),
+                  ctr: ctr.passwordCtr,
+                  hintString: 'Password',
+                  inputTypes: TextInputType.text,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter your password";
+                    } else {
+                      return null;
+                    }
+                  },
+                  maxLines: 20,
+                ),
               ],
             ),
           ),
@@ -76,8 +80,10 @@ class LoginPage extends ConsumerWidget {
             onPressed: () async {
               bool result = ctr.formKey.currentState!.validate();
               if (result) {
-                await AuthLoginService.getToken(
-                    {"username": ctr.loginCtr.text, "password": ctr.passwordCtr.text}, context);
+                await AuthLoginService.getToken({
+                  "username": ctr.loginCtr.text,
+                  "password": ctr.passwordCtr.text
+                }, context);
                 // ignore: use_build_context_synchronously
               }
             },
