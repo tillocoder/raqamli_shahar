@@ -41,7 +41,7 @@ class Routing {
               GoRoute(
                 name: Routes.citizenAdd,
                 path: Routes.citizenAdd,
-                builder: (context, state) => const CitizenAddOrEditScreen(),
+                builder: (context, state) => const CitizenAddScreen(),
               ),
             ],
           ),

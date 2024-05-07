@@ -8,8 +8,9 @@ class CitezensActivities extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(activitiesController);
+    // ignore: unused_local_variable
     var ctr = ref.read(activitiesController);
-    return Scaffold(body: Text('Tamirlash')
+    return const Scaffold(body: const Text('Tamirlash')
         //  ctr.isLoading
         //     ? ListView.builder(
         //         itemCount: ActivitiesGetListServices.activities[0].citizen.length,

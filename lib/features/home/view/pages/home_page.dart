@@ -12,6 +12,7 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(homeController);
+    // ignore: unused_local_variable
     var ctr = ref.read(homeController);
     return Scaffold(
       drawer: const Drawer(),

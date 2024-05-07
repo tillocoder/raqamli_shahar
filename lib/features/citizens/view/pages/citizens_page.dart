@@ -23,44 +23,27 @@ class CitizensPage extends ConsumerWidget {
           var item = CitizenGetListServices.citizen[index];
           return Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade300,
-                    offset: const Offset(1, 1),
-                    spreadRadius: 10,
-                    blurRadius: 10,
-                  )
-                ],
-                borderRadius: BorderRadius.circular(20),
+            child: Card(
+              color: Colors.white,
+              elevation: 6,
+              shadowColor: Colors.grey.shade300,
+              surfaceTintColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
               ),
-              height: 70,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          item.fio,
-                          style: const TextStyle(
-                            fontSize: 17,
-                          ),
-                        ),
-                        Text(
-                          "${item.house.toString()}",
-                          style: const TextStyle(fontSize: 17),
-                        ),
-                      ],
-                    ),
-                    Text(item.phone),
-                  ],
+              child: ListTile(
+                title: Text(item.fio),
+                subtitle: Text(
+                  "Tel: ${item.phone}",
+                  style: const TextStyle(color: Colors.blue),
+                ),
+                trailing: Text(
+                  "${item.house.toString()} - Uy",
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 15,
+                  ),
                 ),
               ),
             ),
