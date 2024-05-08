@@ -3,6 +3,7 @@ import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/features/auth/login/view/pages/login_page.dart';
 import 'package:tamorqa_app/features/citizen_add/view/page/citizen_page.dart';
 import 'package:tamorqa_app/features/citizens/view/pages/citizens_page.dart';
+import 'package:tamorqa_app/features/citizens_activities/view/pages/activitiy_add_screen.dart';
 import 'package:tamorqa_app/features/citizens_activities/view/pages/citizens_activities_page.dart';
 import 'package:tamorqa_app/features/home/view/pages/home_page.dart';
 import 'package:tamorqa_app/keraksiz.dart';
@@ -37,6 +38,11 @@ class Routing {
                 name: Routes.activities,
                 path: Routes.activities,
                 builder: (context, state) => const CitezensActivities(),
+              ),
+              GoRoute(
+                name: Routes.activitiesAdd,
+                path: Routes.activitiesAdd,
+                builder: (context, state) => const CitizenActivitiyAdd(),
               ),
               GoRoute(
                 name: Routes.citizenAdd,

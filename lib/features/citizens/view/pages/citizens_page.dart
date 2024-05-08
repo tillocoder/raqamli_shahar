@@ -6,6 +6,8 @@ import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
+int? activitiyId;
+
 class CitizensPage extends ConsumerWidget {
   const CitizensPage({super.key});
 
@@ -41,6 +43,7 @@ class CitizensPage extends ConsumerWidget {
               child: ListTile(
                 onTap: () async {
                   await ActivitiesGetListServices.getactivitiesList(item.id!);
+
                   // ignore: use_build_context_synchronously
                   context.goNamed(Routes.activities);
                 },

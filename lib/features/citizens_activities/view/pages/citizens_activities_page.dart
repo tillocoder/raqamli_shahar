@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
+import 'package:tamorqa_app/core/widgets/text_widget.dart';
 
 class CitezensActivities extends ConsumerWidget {
   const CitezensActivities({super.key});
@@ -86,6 +89,23 @@ class CitezensActivities extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const TextWidget(
+                                  text: "Yo\'nalish",
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                TextWidget(
+                                  text: directionName,
+                                  color: Colors.blue,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ],
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -182,31 +202,11 @@ class CitezensActivities extends ConsumerWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  final String text;
-  final Color color;
-  final double fontSize;
-  final FontWeight fontWeight;
-  const TextWidget({
-    super.key,
-    required this.text,
-    required this.color,
-    required this.fontSize,
-    required this.fontWeight,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize,
-        fontWeight: fontWeight,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.goNamed(Routes.activitiesAdd);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

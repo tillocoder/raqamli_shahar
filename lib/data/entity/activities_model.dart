@@ -1,12 +1,13 @@
 class Activities {
-  final List<Citizen> citizen;
+  final List<CitizenActivityAddModel> citizen;
 
   Activities({
     required this.citizen,
   });
 
   factory Activities.fromJson(Map<String, dynamic> json) => Activities(
-        citizen: List<Citizen>.from(json["citizen"].map((x) => Citizen.fromJson(x))),
+        citizen: List<CitizenActivityAddModel>.from(
+            json["citizen"].map((x) => CitizenActivityAddModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -19,7 +20,7 @@ class Activities {
   }
 }
 
-class Citizen {
+class CitizenActivityAddModel {
   final int id;
   final String houseQuantity;
   final String area;
@@ -29,7 +30,7 @@ class Citizen {
   final int citizen;
   final int direction;
 
-  Citizen({
+  CitizenActivityAddModel({
     required this.id,
     required this.houseQuantity,
     required this.area,
@@ -40,7 +41,8 @@ class Citizen {
     required this.direction,
   });
 
-  factory Citizen.fromJson(Map<String, dynamic> json) => Citizen(
+  factory CitizenActivityAddModel.fromJson(Map<String, dynamic> json) =>
+      CitizenActivityAddModel(
         id: json["id"],
         houseQuantity: json["house_quantity"],
         area: json["area"],
