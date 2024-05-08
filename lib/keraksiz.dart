@@ -28,7 +28,7 @@ class _KeraksizState extends State<Keraksiz> {
         // );
         //! get list direction
         // await DirectionGetListServices.getdirectionList();
-        await ActivitiesGetListServices.getactivitiesList(13875);
+        // await ActivitiesGetListServices.getactivitiesList(13875);
       }),
     );
   }

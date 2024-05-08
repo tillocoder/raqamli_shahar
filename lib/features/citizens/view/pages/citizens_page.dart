@@ -6,8 +6,6 @@ import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
-int? activitiyId;
-
 class CitizensPage extends ConsumerWidget {
   const CitizensPage({super.key});
 
@@ -19,19 +17,13 @@ class CitizensPage extends ConsumerWidget {
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: const Text('Fuqarolar'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search_sharp),
-          )
-        ],
       ),
       body: ListView.builder(
         itemCount: CitizenGetListServices.citizen.length,
         itemBuilder: (context, index) {
           var item = CitizenGetListServices.citizen[index];
           return Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, top: 5),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
             child: Card(
               color: Colors.white,
               elevation: 6,
@@ -42,8 +34,9 @@ class CitizensPage extends ConsumerWidget {
               ),
               child: ListTile(
                 onTap: () async {
+                  ctr.citezenID = item.id;
+                  debugPrint(ctr.citezenID.toString());
                   await ActivitiesGetListServices.getactivitiesList(item.id!);
-
                   // ignore: use_build_context_synchronously
                   context.goNamed(Routes.activities);
                 },

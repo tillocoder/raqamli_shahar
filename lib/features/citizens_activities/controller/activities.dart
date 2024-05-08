@@ -11,6 +11,7 @@ class ActivitiesController extends ChangeNotifier {
   ActivitiesController() {
     init();
   }
+  int? citezenID;
   TextEditingController houseQuantityCtr = TextEditingController();
   TextEditingController areaCtr = TextEditingController();
   TextEditingController value = TextEditingController();

@@ -21,7 +21,6 @@ class Activities {
 }
 
 class CitizenActivityAddModel {
-  final int id;
   final String houseQuantity;
   final String area;
   final double value;
@@ -31,7 +30,6 @@ class CitizenActivityAddModel {
   final int direction;
 
   CitizenActivityAddModel({
-    required this.id,
     required this.houseQuantity,
     required this.area,
     required this.value,
@@ -43,7 +41,6 @@ class CitizenActivityAddModel {
 
   factory CitizenActivityAddModel.fromJson(Map<String, dynamic> json) =>
       CitizenActivityAddModel(
-        id: json["id"],
         houseQuantity: json["house_quantity"],
         area: json["area"],
         value: json["value"],
@@ -54,7 +51,6 @@ class CitizenActivityAddModel {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "house_quantity": houseQuantity,
         "area": area,
         "value": value,
@@ -66,6 +62,6 @@ class CitizenActivityAddModel {
 
   @override
   String toString() {
-    return 'Citizen(id: $id, houseQuantity: $houseQuantity, area: $area, value: $value, executionTime: $executionTime, income: $income, citizen: $citizen, direction: $direction)';
+    return 'Citizen(, houseQuantity: $houseQuantity, area: $area, value: $value, executionTime: $executionTime, income: $income, citizen: $citizen, direction: $direction)';
   }
 }

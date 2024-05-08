@@ -173,13 +173,12 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                 int id = 0;
                 await ActivitiesGetListServices.getactivitiesList(id);
                 final newActivityAdd = CitizenActivityAddModel(
-                  id: 9,
                   houseQuantity: ctr.houseQuantityCtr.text,
                   area: ctr.areaCtr.text,
-                  value: double.parse(ctr.value.text),
+                  value: int.parse(ctr.value.text).toDouble(),
                   executionTime: ctr.excutionTimeCtr.text,
                   income: ctr.incomeCtr.text,
-                  citizen: 9,
+                  citizen: ctr.citezenID!,
                   direction: int.parse(
                     ctr.direction.toString(),
                   ),
