@@ -42,16 +42,16 @@ class CitizenModel {
   });
 
   factory CitizenModel.fromJson(Map<String, dynamic> json) => CitizenModel(
-        id: json["id"],
-        personalIdentification: json["personal_identification"],
-        passportNumber: json["passport_number"] ?? '',
-        house: json["house"],
-        phone: json["phone"],
-        gender: json["gender"],
-        fio: json["fio"],
-        address: json["address"],
-        lat: json["lat"],
-        lng: json["lng"],
+        id: json["id"] ?? '',
+        personalIdentification: json["personal_identification"] ?? "",
+        passportNumber: json["passport_number"] ?? "",
+        house: json["house"] ?? "",
+        phone: json["phone"] ?? "",
+        gender: json["gender"] ?? "",
+        fio: json["fio"] ?? "",
+        address: json["address"] ?? "",
+        lat: json["lat"] ?? "",
+        lng: json["lng"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
