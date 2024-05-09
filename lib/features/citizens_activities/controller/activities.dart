@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
+import 'package:tamorqa_app/core/services/citizen/search.dart';
+import 'package:tamorqa_app/data/entity/citizen_model.dart';
 
 final activitiesController = ChangeNotifierProvider.autoDispose(
   (ref) => ActivitiesController(),
@@ -17,8 +19,35 @@ class ActivitiesController extends ChangeNotifier {
   TextEditingController value = TextEditingController();
   TextEditingController excutionTimeCtr = TextEditingController();
   TextEditingController incomeCtr = TextEditingController();
+  TextEditingController serchCtr = TextEditingController();
   int? citizenIdCtr;
   int? direction;
+  bool isLoading = false;
+  static Map<String, Object?> paramSearchProduct(String text) =>
+      <String, Object?>{
+        "q": text,
+      };
+  Future<void> searching(String text) async {
+    if (text.isNotEmpty) {
+      CitizenGetListServices.citizen = [];
+      List<CitizenModel>? list = [];
+
+      isLoading = false;
+      notifyListeners();
+      list = await SearchService.getData(param: paramSearchProduct(text));
+      if (list != null) {
+        CitizenGetListServices.citizen = list;
+        isLoading = true;
+        notifyListeners();
+      } else {
+        isLoading = false;
+        notifyListeners();
+      }
+    } else {
+      await CitizenGetListServices.getCitizenList();
+      notifyListeners();
+    }
+  }
 
   void setSelectedGender(int? newValue) {
     switch (newValue) {
@@ -63,7 +92,6 @@ class ActivitiesController extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isLoading = true;
   int id = 13875;
   void init() async {
     isLoading = false;
