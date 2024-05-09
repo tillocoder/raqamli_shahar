@@ -2,19 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 
-final homeController =
-    ChangeNotifierProvider.autoDispose((ref) => HomeController());
+final homeController = ChangeNotifierProvider.autoDispose(
+  (ref) => HomeController(),
+);
 
 class HomeController extends ChangeNotifier {
   bool isLoading = true;
+
   HomeController() {
     init();
   }
 
+  int male = 0;
+  int female = 0;
+
   void init() async {
-    isLoading = false;
+    isLoading = true; // Set isLoading to true before fetching data
+    notifyListeners(); // Notify listeners to update UI
+
+    // Fetch data
     await CitizenGetListServices.getCitizenList();
-    isLoading = true;
-    notifyListeners();
+
+    // Update male and female counts
+    male = CitizenGetListServices.male.length;
+    female = CitizenGetListServices.female.length;
+
+    isLoading = false; // Set isLoading to false after fetching data
+    notifyListeners(); // Notify listeners to update UI
   }
 }

@@ -1,5 +1,7 @@
-const tradeWeekData = [
-  {'value': 300, 'name': 'Fuqarolar'},
-  {'value': 132, 'name': 'Erkaklar'},
-  {'value': 235, 'name': 'Ayollar'},
+import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
+import 'package:tamorqa_app/features/home/controller/home_ctr.dart';
+
+final tradeWeekData = [
+  {'value': homeController, 'name': 'Erkaklar'},
+  {'value': CitizenGetListServices.female.length, 'name': 'Ayollar'},
 ];
