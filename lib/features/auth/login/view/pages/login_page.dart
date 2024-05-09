@@ -25,7 +25,7 @@ class LoginPage extends ConsumerWidget {
             key: ctr.formKey,
             child: Column(
               children: [
-                const SizedBox(height: 70),
+                const SizedBox(height: 40),
                 Image.asset(
                   'assets/images/herb1.png',
                   height: 100,
@@ -46,7 +46,7 @@ class LoginPage extends ConsumerWidget {
                   },
                   maxLines: 30,
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 CTextField(
                   ctr: ctr.passwordCtr,
                   hintString: 'Password',

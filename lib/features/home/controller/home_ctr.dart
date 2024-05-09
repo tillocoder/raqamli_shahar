@@ -17,8 +17,8 @@ class HomeController extends ChangeNotifier {
   int female = 0;
 
   void init() async {
-    isLoading = true; // Set isLoading to true before fetching data
-    notifyListeners(); // Notify listeners to update UI
+    isLoading = true;
+    notifyListeners();
 
     // Fetch data
     await CitizenGetListServices.getCitizenList();

@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
-import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
 class CitizensPage extends ConsumerWidget {
@@ -17,17 +16,22 @@ class CitizensPage extends ConsumerWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
-        title:  TextField(
+        title: TextField(
           controller: ctr.serchCtr,
-          onChanged: (value)async{
-                        await ctr.searching(value);
-
+          onChanged: (value) async {
+            await ctr.searching(value);
           },
           decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search_rounded),
-              contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)), gapPadding: 5)),
+            hintText: 'Fuqarolar',
+            suffixIcon: Icon(Icons.search_rounded),
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20),
+              ),
+              gapPadding: 5,
+            ),
+          ),
         ),
       ),
       body: ListView.builder(
