@@ -44,8 +44,8 @@ class ActivitiesController extends ChangeNotifier {
         notifyListeners();
       }
     } else {
-      await CitizenGetListServices.getCitizenList();
-      notifyListeners();
+    CitizenGetListServices a = CitizenGetListServices();
+    await a.getCitizenList();      notifyListeners();
     }
   }
 
@@ -96,8 +96,8 @@ class ActivitiesController extends ChangeNotifier {
   void init() async {
     isLoading = false;
     await ActivitiesGetListServices.getactivitiesList(id);
-    await CitizenGetListServices.getCitizenList();
-    isLoading = true;
+    CitizenGetListServices a = CitizenGetListServices();
+    await a.getCitizenList();    isLoading = true;
     notifyListeners();
   }
 }

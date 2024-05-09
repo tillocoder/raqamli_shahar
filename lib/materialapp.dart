@@ -8,6 +8,7 @@ import 'package:tamorqa_app/core/theme/lightt_theme.dart';
 
 MaterialApp materialApp(BuildContext context) {
   return MaterialApp.router(
+    
     locale: InheritedLocalNotifier.maybeOf(context)?.appLocale ??
         const Locale('ru', 'Ru'),
     supportedLocales: const [

@@ -19,13 +19,13 @@ class _KeraksizState extends State<Keraksiz> {
   }
 
   void init() async {
-    await CitizenGetListServices.getCitizenList();
+    CitizenGetListServices a = CitizenGetListServices();
+    await a.getCitizenList();
     setState(() {});
   }
 
   bool isLoading = false;
-  static Map<String, Object?> paramSearchProduct(String text) =>
-      <String, Object?>{
+  static Map<String, Object?> paramSearchProduct(String text) => <String, Object?>{
         "q": text,
       };
 
@@ -46,7 +46,8 @@ class _KeraksizState extends State<Keraksiz> {
         setState(() {});
       }
     } else {
-      await CitizenGetListServices.getCitizenList();
+      CitizenGetListServices a = CitizenGetListServices();
+      await a.getCitizenList();
       setState(() {});
     }
   }

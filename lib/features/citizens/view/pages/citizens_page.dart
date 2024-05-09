@@ -14,7 +14,6 @@ class CitizensPage extends ConsumerWidget {
     ref.watch(activitiesController);
     var ctr = ref.read(activitiesController);
     return Scaffold(
-      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: TextField(
           controller: ctr.serchCtr,
@@ -41,7 +40,6 @@ class CitizensPage extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
             child: Card(
-              color: Colors.white,
               elevation: 6,
               shadowColor: Colors.grey.shade300,
               surfaceTintColor: Colors.white,

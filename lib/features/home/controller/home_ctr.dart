@@ -21,7 +21,8 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
 
     // Fetch data
-    await CitizenGetListServices.getCitizenList();
+    CitizenGetListServices a = CitizenGetListServices();
+    await a.getCitizenList();
 
     // Update male and female counts
     male = CitizenGetListServices.male.length;

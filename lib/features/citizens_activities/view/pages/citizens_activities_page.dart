@@ -12,8 +12,7 @@ class CitezensActivities extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: const Text('Fuqaro faoliyati'),
+        title:  const Text('Fuqaro faoliyati'),
         centerTitle: true,
       ),
       body: Column(
@@ -21,182 +20,171 @@ class CitezensActivities extends ConsumerWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: Container(
-                color: Colors.white,
-                child: ListView.builder(
-                  itemCount: ActivitiesGetListServices.activities.length,
-                  itemBuilder: (context, index) {
-                    var item = ActivitiesGetListServices.activities[index];
-                    String directionName = '';
-                    switch (item.direction) {
-                      case 1:
-                        directionName = 'Иссиқхона';
-                        break;
-                      case 2:
-                        directionName = 'Қўзиқорин етиштириш';
-                        break;
-                      case 3:
-                        directionName = 'Асаларичилик';
-                        break;
-
-                      case 4:
-                        directionName = 'Паррандачилик';
-                        break;
-
-                      case 5:
-                        directionName = 'Узумчилик';
-                        break;
-
-                      case 6:
-                        directionName = 'Чорвачилик';
-                        break;
-
-                      case 7:
-                        directionName = 'Деҳқончилик';
-                        break;
-
-                      case 8:
-                        directionName = 'Ишлаб чиқариш';
-
-                        break;
-                      case 9:
-                        directionName = 'Хизмат кўрсатиш';
-
-                        break;
-                      case 10:
-                        directionName = 'Ҳунармандчилик';
-
-                        break;
-                      case 11:
-                        directionName = 'Тикувчилик';
-
-                        break;
-                      case 12:
-                        directionName = 'Пазандачилик';
-
-                        break;
-                      default:
-                        directionName = 'Unknown';
-                    }
-                    return Card(
-                      color: Colors.white,
-                      surfaceTintColor: Colors.white,
-                      shadowColor: Colors.grey,
-                      elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const TextWidget(
-                                  text: "Yo\'nalish",
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                TextWidget(
-                                  text: directionName,
-                                  color: Colors.blue,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const TextWidget(
-                                  text: "Honadon soni",
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                TextWidget(
-                                  text: item.houseQuantity,
-                                  color: Colors.blue,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const TextWidget(
-                                  text: "Maydoni",
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                TextWidget(
-                                  text: "${item.area} sotix",
-                                  color: Colors.blue,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const TextWidget(
-                                  text: "Qiymati",
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                TextWidget(
-                                  text: "${item.value.toString()} MLN",
-                                  color: Colors.blue,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const TextWidget(
-                                  text: 'Ijro vaqti',
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                TextWidget(
-                                  text: item.executionTime,
-                                  color: Colors.blue,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const TextWidget(
-                                  text: 'Daromad MLN.SUM',
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                                TextWidget(
-                                  text: item.income,
-                                  color: Colors.blue,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+              child: ListView.builder(
+                itemCount: ActivitiesGetListServices.activities.length,
+                itemBuilder: (context, index) {
+                  var item = ActivitiesGetListServices.activities[index];
+                  String directionName = '';
+                  switch (item.direction) {
+                    case 1:
+                      directionName = 'Иссиқхона';
+                      break;
+                    case 2:
+                      directionName = 'Қўзиқорин етиштириш';
+                      break;
+                    case 3:
+                      directionName = 'Асаларичилик';
+                      break;
+              
+                    case 4:
+                      directionName = 'Паррандачилик';
+                      break;
+              
+                    case 5:
+                      directionName = 'Узумчилик';
+                      break;
+              
+                    case 6:
+                      directionName = 'Чорвачилик';
+                      break;
+              
+                    case 7:
+                      directionName = 'Деҳқончилик';
+                      break;
+              
+                    case 8:
+                      directionName = 'Ишлаб чиқариш';
+              
+                      break;
+                    case 9:
+                      directionName = 'Хизмат кўрсатиш';
+              
+                      break;
+                    case 10:
+                      directionName = 'Ҳунармандчилик';
+              
+                      break;
+                    case 11:
+                      directionName = 'Тикувчилик';
+              
+                      break;
+                    case 12:
+                      directionName = 'Пазандачилик';
+              
+                      break;
+                    default:
+                      directionName = 'Unknown';
+                  }
+                  return Card(
+                    surfaceTintColor: Colors.white,
+                    shadowColor: Colors.grey,
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const TextWidget(
+                                text: "Yo\'nalish",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              TextWidget(
+                                text: directionName,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const TextWidget(
+                                text: "Honadon soni",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              TextWidget(
+                                color: Colors.blue,
+                                text: item.houseQuantity,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const TextWidget(
+                                text: "Maydoni",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              TextWidget(
+                                text: "${item.area} sotix",
+                                color: Colors.blue,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const TextWidget(
+                                text: "Qiymati",
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              TextWidget(
+                                text: "${item.value.toString()} MLN",
+                                color: Colors.blue,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const TextWidget(
+                                text: 'Ijro vaqti',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              TextWidget(
+                                text: item.executionTime,
+                                color: Colors.blue,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const TextWidget(
+                                text: 'Daromad MLN.SUM',
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                              TextWidget(
+                                text: item.income,
+                                color: Colors.blue,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ),

@@ -1,16 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamorqa_app/core/services/app_urls/urls.dart';
 import 'package:tamorqa_app/core/services/base_options/base_options.dart';
 import 'package:tamorqa_app/data/entity/citizen_model.dart';
 
-class CitizenGetListServices {
+final citizenGetListServicesController =
+    ChangeNotifierProvider.autoDispose((ref) => CitizenGetListServices());
+
+class CitizenGetListServices extends ChangeNotifier {
+  CitizenGetListServices() {
+    getCitizenList();
+  }
   static Dio dio = Dio(Baseoption.baseOptionsT);
   static List<CitizenModel> citizen = [];
   static List<CitizenModel> male = [];
   static List<CitizenModel> female = [];
 
-  static Future<void> getCitizenList() async {
+  Future<void> getCitizenList() async {
     try {
       final response = await dio.get(Urls.apiCitizenList);
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -22,7 +29,7 @@ class CitizenGetListServices {
         // Clear previous lists
         male.clear();
         female.clear();
-
+        notifyListeners();
         // Categorize citizens based on gender
         for (var citizen in citizen) {
           if (citizen.gender == 1) {
@@ -31,10 +38,10 @@ class CitizenGetListServices {
             female.add(citizen);
           }
         }
+        notifyListeners();
       }
     } catch (e) {
       debugPrint('Exception: $e');
     }
   }
-  
 }
