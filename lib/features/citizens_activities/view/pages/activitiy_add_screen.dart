@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/citizen_activity_add.dart';
+import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
 import 'package:tamorqa_app/data/entity/activities_model.dart';
 import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
@@ -15,6 +16,8 @@ class CitizenActivitiyAdd extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var ctr = ref.read(activitiesController);
+    ref.watch(activitiesController);
+    var item = CitizenGetListServices.citizen;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

@@ -4,7 +4,14 @@ import 'package:tamorqa_app/setup.dart';
 
 class Baseoption {
   static String tokenn = box.get('access') ?? '';
+
+  static Map<String, Object?> paramSearchProduct(String text) =>
+      <String, Object?>{
+        "q": text,
+      };
+
   static BaseOptions baseOptionsT = BaseOptions(
+    // queryParameters: paramSearchProduct(text),
     baseUrl: Urls.baseUrl,
     headers: {
       'Content-Type': 'application/json',

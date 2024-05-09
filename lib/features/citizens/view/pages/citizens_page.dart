@@ -17,6 +17,12 @@ class CitizensPage extends ConsumerWidget {
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: const Text('Fuqarolar'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: CitizenGetListServices.citizen.length,
