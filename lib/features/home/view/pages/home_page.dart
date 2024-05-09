@@ -15,8 +15,8 @@ class HomePage extends ConsumerWidget {
     // ignore: unused_local_variable
     var ctr = ref.read(homeController);
     return Scaffold(
-      drawer: const Drawer(),
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('Mahalla ijro'),
       ),
       body: SingleChildScrollView(
@@ -36,18 +36,24 @@ class HomePage extends ConsumerWidget {
                     data: CitizenGetListServices.citizen.length,
                   ),
                   const SizedBox(height: 10),
-                  const ChartText(
+                  ChartText(
+                    onTap: () {
+                      context.goNamed(Routes.citizens);
+                    },
                     text: 'Erkaklar',
                     colors: Colors.green,
                     icon: Icons.person,
-                    data: 0,
+                    data: CitizenGetListServices.male.length,
                   ),
                   const SizedBox(height: 10),
-                  const ChartText(
+                  ChartText(
+                    onTap: () {
+                      context.goNamed(Routes.citizens);
+                    },
                     text: 'Ayollar',
                     colors: Colors.orange,
                     icon: Icons.woman,
-                    data: 0,
+                    data: CitizenGetListServices.female.length,
                   ),
                 ],
               ),
