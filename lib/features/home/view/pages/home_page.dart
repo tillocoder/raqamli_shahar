@@ -34,8 +34,14 @@ class HomePage extends ConsumerWidget {
               child: Chart(
                 rebuild: false,
                 data: [
-                  {"name": 'Erkaklar', "value": ctr.male},
-                  {"name": "Ayollar", "value": ctr.female}
+                  {
+                    "name": 'Erkaklar',
+                    "value": ctr.male,
+                  },
+                  {
+                    "name": "Ayollar",
+                    "value": ctr.female,
+                  }
                 ],
                 variables: {
                   'name': Variable(

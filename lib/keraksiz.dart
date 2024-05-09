@@ -24,8 +24,8 @@ class _KeraksizState extends State<Keraksiz> {
   }
 
   bool isLoading = false;
-  // static Map<String, Object?> paramEmpty() => const <String, Object?>{};
-  static Map<String, Object?> paramSearchProduct(String text) => <String, Object?>{
+  static Map<String, Object?> paramSearchProduct(String text) =>
+      <String, Object?>{
         "q": text,
       };
 
@@ -38,7 +38,7 @@ class _KeraksizState extends State<Keraksiz> {
       setState(() {});
       list = await SearchService.getData(param: paramSearchProduct(text));
       if (list != null) {
-        CitizenGetListServices.citizen = list; // Ma'lumotni listga o'zgartirish
+        CitizenGetListServices.citizen = list;
         isLoading = true;
         setState(() {});
       } else {
@@ -65,14 +65,15 @@ class _KeraksizState extends State<Keraksiz> {
         ),
       ),
       body: ListView.builder(
-          itemCount: CitizenGetListServices.citizen.length,
-          itemBuilder: (contex, index) {
-            var item = CitizenGetListServices.citizen[index];
-            return ListTile(
-              title: Text(item.fio),
-              subtitle: Text(item.passportNumber),
-            );
-          }),
+        itemCount: CitizenGetListServices.citizen.length,
+        itemBuilder: (context, index) {
+          var item = CitizenGetListServices.citizen[index];
+          return ListTile(
+            title: Text(item.fio),
+            subtitle: Text(item.passportNumber),
+          );
+        },
+      ),
     );
   }
 }

@@ -11,7 +11,7 @@ import 'package:tamorqa_app/setup.dart';
 
 class Routing {
   static final GoRouter router = GoRouter(
-    initialLocation: box.get('access') == null ? Routes.login : Routes.home,
+    initialLocation: box.get('access') == null ? Routes.login : Routes.keraksiz,
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
