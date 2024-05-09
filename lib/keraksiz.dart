@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
+import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
+import 'package:tamorqa_app/core/services/citizen/search.dart';
+import 'package:tamorqa_app/data/entity/citizen_model.dart';
 
 class Keraksiz extends StatefulWidget {
   const Keraksiz({super.key});
@@ -9,27 +11,68 @@ class Keraksiz extends StatefulWidget {
 }
 
 class _KeraksizState extends State<Keraksiz> {
+  final serch = TextEditingController();
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
+
+  void init() async {
+    await CitizenGetListServices.getCitizenList();
+    setState(() {});
+  }
+
+  bool isLoading = false;
+  // static Map<String, Object?> paramEmpty() => const <String, Object?>{};
+  static Map<String, Object?> paramSearchProduct(String text) => <String, Object?>{
+        "q": text,
+      };
+
+  Future<void> searching(String text) async {
+    if (text.isNotEmpty) {
+      CitizenGetListServices.citizen = [];
+      List<CitizenModel>? list = [];
+
+      isLoading = false;
+      setState(() {});
+      list = await SearchService.getData(param: paramSearchProduct(text));
+      if (list != null) {
+        CitizenGetListServices.citizen = list; // Ma'lumotni listga o'zgartirish
+        isLoading = true;
+        setState(() {});
+      } else {
+        isLoading = false;
+        setState(() {});
+      }
+    } else {
+      await CitizenGetListServices.getCitizenList();
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: const Column(),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        //! create citizin
-        // await CitizenPostServices.postCreatCitezen(
-        //   CitizenModel(
-        //     personalIdentification: null,
-        //     house: 0,
-        //     phone: "91 658 23 74",
-        //     gender: 2,
-        //     fio: "Jasur Jasurov",
-        //     address: "Байроқ",
-        //   ),
-        // );
-        //! get list direction
-        // await DirectionGetListServices.getdirectionList();
-        // await ActivitiesGetListServices.getactivitiesList(13875);
-      }),
+      appBar: AppBar(
+        title: TextField(
+          controller: serch,
+          onChanged: (value) async {
+            debugPrint('Value: ' + value);
+            await searching(value);
+            setState(() {});
+          },
+        ),
+      ),
+      body: ListView.builder(
+          itemCount: CitizenGetListServices.citizen.length,
+          itemBuilder: (contex, index) {
+            var item = CitizenGetListServices.citizen[index];
+            return ListTile(
+              title: Text(item.fio),
+              subtitle: Text(item.passportNumber),
+            );
+          }),
     );
   }
 }
