@@ -41,13 +41,13 @@ class CitizenActivityAddModel {
 
   factory CitizenActivityAddModel.fromJson(Map<String, dynamic> json) =>
       CitizenActivityAddModel(
-        houseQuantity: json["house_quantity"],
-        area: json["area"],
-        value: json["value"],
-        executionTime: json["execution_time"],
-        income: json["income"],
-        citizen: json["citizen"],
-        direction: json["direction"],
+        houseQuantity: json["house_quantity"] ?? 'house_quantity',
+        area: json["area"] ?? 'area',
+        value: json["value"] ?? 'value',
+        executionTime: json["execution_time"] ?? 'execution_time',
+        income: json["income"] ?? 'income',
+        citizen: json["citizen"] ?? 'citizen',
+        direction: json["direction"] ?? 'direction',
       );
 
   Map<String, dynamic> toJson() => {

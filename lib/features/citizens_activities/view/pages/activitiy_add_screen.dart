@@ -16,6 +16,7 @@ class CitizenActivitiyAdd extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var ctr = ref.read(activitiesController);
+    ref.watch(activitiesController);
     var item = CitizenGetListServices.citizen;
     return Scaffold(
       appBar: AppBar(

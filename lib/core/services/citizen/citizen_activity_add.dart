@@ -8,8 +8,10 @@ class CitizenActivityAdd {
   static Dio dio = Dio(Baseoption.baseOptionsT);
   static Future<void> postCreatCitezen(CitizenActivityAddModel data) async {
     print('activitiy sending for server');
-    var response =
-        await dio.post(Urls.apiactivitiescreate, data: data.toJson());
+    var response = await dio.post(
+      Urls.apiactivitiescreate,
+      data: data.toJson(),
+    );
     try {
       if (response.statusCode == 200 || response.statusCode == 201) {
         print(response.data);
