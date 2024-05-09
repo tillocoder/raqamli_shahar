@@ -1,5 +1,3 @@
-// To parse this JSON data, do
-
 import 'dart:convert';
 
 List<CitizenModel> citizenModelFromJson(String str) => List<CitizenModel>.from(
