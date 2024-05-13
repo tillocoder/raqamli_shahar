@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
-import 'package:tamorqa_app/core/services/citizen/citizen_create.dart';
-import 'package:tamorqa_app/data/entity/citizen_model.dart';
+import 'package:tamorqa_app/core/widgets/dropdown_widget.dart';
 import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
 import 'package:tamorqa_app/features/citizen_add/controller/citizen_add_ctr.dart';
 import 'package:tamorqa_app/features/citizen_add/controller/golocator.dart';
 
 class CitizenAddScreen extends ConsumerWidget {
+  // ignore: use_key_in_widget_constructors
   const CitizenAddScreen({Key? key});
 
   @override
@@ -21,97 +21,16 @@ class CitizenAddScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('O\'zgartirish'),
+        title: const Text('Fuqaro va faoliyat'),
       ),
       body: KeyboardDismisser(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CTextField(
-                  ctr: ctr.pinflCtr,
-                  hintString: 'Pinfl',
-                  inputTypes: TextInputType.text,
-                  validator: (value) {
-                    return null;
-                  },
-                  maxLines: 30,
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: CTextField(
-                        ctr: ctr.houseNumber,
-                        hintString: 'Uy raqami:',
-                        inputTypes: TextInputType.number,
-                        validator: (value) {
-                          return null;
-                        },
-                        maxLines: 10,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: CTextField(
-                        ctr: ctr.passportNumber,
-                        hintString: 'Passport raqami:',
-                        inputTypes: TextInputType.text,
-                        validator: (value) {
-                          return null;
-                        },
-                        maxLines: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: CTextField(
-                        ctr: ctr.phoneNumber,
-                        hintString: 'Telefon',
-                        inputTypes: TextInputType.phone,
-                        validator: (value) {
-                          return null;
-                        },
-                        maxLines: 10,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: DropdownButton<int>(
-                        hint: const Text(
-                          'Jinsi',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        isDense: true,
-                        borderRadius: BorderRadius.circular(15),
-                        value: ctr.selectedGender,
-                        onChanged: (newValue) {
-                          ctr.setSelectedGender(newValue);
-                        },
-                        items: const [
-                          DropdownMenuItem<int>(
-                            value: 2,
-                            child: Text('Ayol'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 1,
-                            child: Text('Erkak'),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
                 CTextField(
                   ctr: ctr.fioCtr,
                   hintString: 'FIO',
@@ -122,57 +41,216 @@ class CitizenAddScreen extends ConsumerWidget {
                   maxLines: 100,
                 ),
                 const SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: CTextField(
+                        ctr: ctr.passportNumber,
+                        hintString: 'PASSPORT',
+                        inputTypes: TextInputType.text,
+                        validator: (value) {
+                          return null;
+                        },
+                        maxLines: 100,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: CTextField(
+                        ctr: ctr.passportNumber,
+                        hintString: 'PINFL',
+                        inputTypes: TextInputType.text,
+                        validator: (value) {
+                          return null;
+                        },
+                        maxLines: 100,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: CTextField(
+                        ctr: ctr.passportNumber,
+                        hintString: 'TEL',
+                        inputTypes: TextInputType.text,
+                        validator: (value) {
+                          return null;
+                        },
+                        maxLines: 100,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: DropDownWidget(
+                        text: 'Jinsi',
+                        value: ctr.selectedGender,
+                        onChanged: (newValue) {
+                          ctr.setSelectedGender(newValue);
+                        },
+                        items: const [
+                          CustomDropdownMenuItem(value: 2, text: 'Ayol'),
+                          CustomDropdownMenuItem(value: 1, text: 'Erkak'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CTextField(
+                        ctr: ctr.passportNumber,
+                        hintString: 'Uy raqami',
+                        inputTypes: TextInputType.text,
+                        validator: (value) {
+                          return null;
+                        },
+                        maxLines: 100,
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: CTextField(
+                        ctr: ctr.passportNumber,
+                        hintString: 'Tug\'ulgan yil',
+                        inputTypes: TextInputType.text,
+                        validator: (value) {
+                          return null;
+                        },
+                        maxLines: 100,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
                 CTextField(
-                  ctr: ctr.address,
-                  hintString: 'Address',
+                  ctr: ctr.passportNumber,
+                  hintString: 'Manzil',
                   inputTypes: TextInputType.text,
                   validator: (value) {
                     return null;
                   },
                   maxLines: 100,
                 ),
+                const SizedBox(height: 10),
+                CTextField(
+                  ctr: ctr.passportNumber,
+                  hintString: 'Lider tadbirkor',
+                  inputTypes: TextInputType.text,
+                  validator: (value) {
+                    return null;
+                  },
+                  maxLines: 100,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: DropDownWidget(
+                        text: 'Ijtimoiy holati',
+                        value: ctr.selectedHolat,
+                        onChanged: (newValue) {
+                          ctr.setConditionIjtimoiy(newValue);
+                        },
+                        items: const [
+                          CustomDropdownMenuItem(
+                            value: 2,
+                            text: 'Yordamga muhtoj',
+                          ),
+                          CustomDropdownMenuItem(
+                            value: 1,
+                            text: 'Yordamga muhtoj emas',
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: DropDownWidget(
+                        text: 'Bandlik holat',
+                        value: ctr.selectedBandlik,
+                        onChanged: (value) {
+                          ctr.setConditionBandlik(value);
+                        },
+                        items: const [
+                          CustomDropdownMenuItem(
+                            value: 3,
+                            text: 'Ishl bilan taminlandi',
+                          ),
+                          CustomDropdownMenuItem(
+                            value: 2,
+                            text: 'Ish joyiga ega',
+                          ),
+                          CustomDropdownMenuItem(
+                            value: 1,
+                            text: 'Ishsiz',
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Visibility(
+                  visible: ctr.selectedBandlik == 2,
+                  child: Column(
+                    children: [
+                      DropDownWidget(
+                        text: 'Ish joyi darajasi',
+                        value: ctr.ishJoyiDarajasi,
+                        onChanged: (value) {
+                          ctr.setIshjoyiDarajasi(value);
+                        },
+                        items: const [
+                          CustomDropdownMenuItem(
+                            value: 2,
+                            text: 'Viloyat',
+                          ),
+                          CustomDropdownMenuItem(
+                            value: 1,
+                            text: 'Tuman',
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      DropDownWidget(
+                        text: 'Soxasi',
+                        value: ctr.soxa,
+                        onChanged: (value) {
+                          ctr.setSoxa(value);
+                        },
+                        items: const [
+                          CustomDropdownMenuItem(
+                            value: 2,
+                            text: 'Ijtimoiy',
+                          ),
+                          CustomDropdownMenuItem(
+                            value: 1,
+                            text: 'Iqtisodiy',
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: 50,
-            child: ElevatedButton(
-              onPressed: () async {
-                await ctrLocation.joylashuvniAniqlash();
-                final newCitizen = CitizenModel(
-                  id: 1,
-                  personalIdentification: ctr.pinflCtr.text,
-                  house: int.parse(ctr.houseNumber.text),
-                  phone: ctr.phoneNumber.text,
-                  gender: ctr.selectedGender!,
-                  fio: ctr.fioCtr.text,
-                  address: ctr.fioCtr.text,
-                  lat: ctrLocation.myPosition.latitude.toString(),
-                  lng: ctrLocation.myPosition.longitude.toString(),
-                  passportNumber: ctr.passportNumber.text,
-                );
-                await CitizenCreateService.postCreatCitezen(newCitizen);
-                context.goNamed(Routes.citizens);
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                maximumSize: const Size(double.infinity, 100),
-                backgroundColor: Colors.indigo,
-              ),
-              child: Text(
-                ctr.isLoading ? 'Saqlanmoqda...' : 'Saqlash',
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.goNamed(Routes.activitiesAdd);
+        },
+        child: const Text('Next>'),
       ),
     );
   }

@@ -20,15 +20,14 @@ class CTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTabletOrLaptop = MediaQuery.of(context).size.width >= 600;
-
     return Center(
       child: SizedBox(
         width: isTabletOrLaptop ? 400 : width,
         child: TextField(
-          maxLength: maxLines,
           controller: ctr,
           keyboardType: inputTypes,
           decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(17),
             hintText: hintString,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),

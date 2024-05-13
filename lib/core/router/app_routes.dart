@@ -6,7 +6,6 @@ import 'package:tamorqa_app/features/citizens/view/pages/citizens_page.dart';
 import 'package:tamorqa_app/features/citizens_activities/view/pages/activitiy_add_screen.dart';
 import 'package:tamorqa_app/features/citizens_activities/view/pages/citizens_activities_page.dart';
 import 'package:tamorqa_app/features/home/view/pages/home_page.dart';
-import 'package:tamorqa_app/keraksiz.dart';
 import 'package:tamorqa_app/setup.dart';
 
 class Routing {
@@ -14,11 +13,6 @@ class Routing {
     initialLocation: box.get('access') == null ? Routes.login : Routes.home,
     debugLogDiagnostics: true,
     routes: [
-      GoRoute(
-        name: Routes.keraksiz,
-        path: Routes.keraksiz,
-        builder: (context, state) => const Keraksiz(),
-      ),
       GoRoute(
         name: Routes.login,
         path: Routes.login,

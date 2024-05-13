@@ -23,6 +23,7 @@ class ActivitiesController extends ChangeNotifier {
   int? citizenIdCtr;
   int? direction;
   bool isLoading = false;
+
   static Map<String, Object?> paramSearchProduct(String text) =>
       <String, Object?>{
         "q": text,

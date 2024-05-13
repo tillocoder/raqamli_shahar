@@ -12,6 +12,7 @@ import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
 class CitizenActivitiyAdd extends ConsumerWidget {
+  // ignore: use_key_in_widget_constructors
   const CitizenActivitiyAdd({Key? key});
 
   @override
@@ -185,8 +186,8 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                     ctr.direction.toString(),
                   ),
                 );
-                print(ctr.direction.toString());
                 await CitizenActivityAdd.postCreatCitezen(newActivityAdd);
+                // ignore: use_build_context_synchronously
                 context.goNamed(Routes.citizens);
               },
               style: ElevatedButton.styleFrom(
