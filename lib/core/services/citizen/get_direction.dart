@@ -28,9 +28,7 @@ class DirectionGetListServices {
     String? refreshToken = await box.get('refresh');
     String? accessToken = await box.get('access');
     // print(refreshToken);
-    print(
-        '345783485734987583475346758634785678346578365874365783465783465364758634567429684659826753872465872346587236579263497568347956235');
-    print(" token akses yoq$accessToken");
+
     if (refreshToken != null) {
       try {
         var response = await dio.post(

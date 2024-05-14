@@ -28,10 +28,8 @@ class CitizenGetListServices extends ChangeNotifier {
               (json) => CitizenModel.fromJson(json),
             )
             .toList();
-        // Clear previous lists
         male.clear();
         female.clear();
-        // Categorize citizens based on gender
         for (var citizen in citizen) {
           if (citizen.gender == 1) {
             male.add(citizen);
@@ -59,7 +57,9 @@ class CitizenGetListServices extends ChangeNotifier {
 
   static Future<void> refreshAccessToken() async {
     String? refreshToken = await box.get('refresh');
+    String? accessToken = await box.get('acces');
     print(refreshToken);
+    print("Accessssssssss ss ss s ss s ss s$accessToken");
     if (refreshToken != null) {
       try {
         var response = await dio.post(
@@ -73,7 +73,9 @@ class CitizenGetListServices extends ChangeNotifier {
             debugPrint("New Access Token: $accessToken");
             await box.put('access', accessToken);
             // Update token in Dio instance
-            dio.options.headers["Authorization"] = "Bearer $accessToken";
+            dio.options.headers["Authorization"] =
+                "Bearer ${await box.get('access')}";
+            final response = await dio.get(Urls.apiCitizenList);
           }
         } else {
           debugPrint('Failed to refresh access token');
