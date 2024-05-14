@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tamorqa_app/core/services/app_urls/urls.dart';
 import 'package:tamorqa_app/core/services/base_options/base_options.dart';
 import 'package:tamorqa_app/data/entity/directios.dart';
+import 'package:tamorqa_app/setup.dart';
 
 class DirectionGetListServices {
   static Dio dio = Dio(Baseoption.baseOptionsT);
@@ -12,12 +13,50 @@ class DirectionGetListServices {
 
     try {
       if (response.statusCode == 200 || response.statusCode == 201) {
-        directions = (response.data as List).map((e) => Directions.fromJson(e)).toList();
-        debugPrint(directions.toString());
+        directions =
+            (response.data as List).map((e) => Directions.fromJson(e)).toList();
+        debugPrint(
+          directions.toString(),
+        );
       }
     } catch (e) {
-      // ignore: use_build_context_synchronously
       debugPrint('Exception ${response.statusCode}');
+    }
+  }
+
+  static Future<void> refreshAccessToken() async {
+    String? refreshToken = await box.get('refresh');
+    String? accessToken = await box.get('access');
+    // print(refreshToken);
+    print(
+        '345783485734987583475346758634785678346578365874365783465783465364758634567429684659826753872465872346587236579263497568347956235');
+    print(" token akses yoq$accessToken");
+    if (refreshToken != null) {
+      try {
+        var response = await dio.post(
+          '${Urls.baseUrl}${Urls.apiRefresh}',
+          data: {'refresh': refreshToken},
+        );
+        if (response.statusCode == 200) {
+          var responseData = response.data as Map<String, dynamic>;
+          String? accessToken = responseData["access"] as String?;
+          if (accessToken != null) {
+            debugPrint("New Access Token: $accessToken");
+            await box.put('access', accessToken);
+            // Update token in Dio instance
+            dio.options.headers["Authorization"] = "Bearer $accessToken";
+          }
+        } else {
+          debugPrint('Failed to refresh access token');
+          // Handle the failure scenario, such as showing an error message
+        }
+      } catch (e) {
+        debugPrint('Failed to refresh access token: $e');
+        // Handle the failure scenario, such as showing an error message
+      }
+    } else {
+      debugPrint('No refresh token available');
+      // Handle the scenario where there's no refresh token available
     }
   }
 }

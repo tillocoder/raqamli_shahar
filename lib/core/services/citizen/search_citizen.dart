@@ -19,6 +19,7 @@ class SearchCitizen {
             .toList();
       }
     } catch (e) {
+      // ignore: avoid_print
       print('Exception: $e');
     }
   }

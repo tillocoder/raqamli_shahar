@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -19,12 +17,13 @@ class AuthLoginService {
       if (response.statusCode == 200 || response.statusCode == 201) {
         var responseData = response.data as Map<String, dynamic>;
         String? accessToken = responseData["access"] as String?;
-        String? refreshToken = responseData["refresh"] as String?; // fix here
+        String? refreshToken = responseData["refresh"] as String?;
         if (accessToken != null) {
           debugPrint("Access Token: $accessToken");
           debugPrint("Refresh Token: $refreshToken");
           await box.put('access', accessToken);
           await box.put('refresh', refreshToken);
+          // ignore: use_build_context_synchronously
           context.go(Routes.home);
         } else {
           return;
@@ -44,62 +43,10 @@ class AuthLoginService {
   }
 
   static Future<String?> getAccessToken() async {
-    // Function to retrieve the access token from wherever you've stored it
     return box.get('access');
   }
 
   static Future<String?> getRefreshToken() async {
-    // Function to retrieve the refresh token from wherever you've stored it
     return box.get('refresh');
-  }
-
-  static Future<void> refreshTokenIfNeeded() async {
-    String? accessToken = await getAccessToken();
-    if (accessToken != null) {
-      // Check if the access token is expired
-      if (JwtUtils.isExpired(accessToken)) {
-        // Access token is expired, refresh it
-        String? refreshToken = await getRefreshToken();
-        if (refreshToken != null) {
-          try {
-            // Send a request to refresh the access token
-            var response = await dio.post('${Urls.baseUrl}${Urls.apiRefresh}',
-                data: {"refresh": refreshToken});
-            if (response.statusCode == 200 || response.statusCode == 201) {
-              var responseData = response.data as Map<String, dynamic>;
-              String? newAccessToken = responseData["access"] as String?;
-              if (newAccessToken != null) {
-                await box.put('access', newAccessToken);
-              }
-            }
-          } catch (e) {
-            // Handle error while refreshing token
-            debugPrint('Error refreshing token: $e');
-          }
-        }
-      }
-    }
-  }
-}
-
-class JwtUtils {
-  static bool isExpired(String token) {
-    final parts = token.split('.');
-    if (parts.length != 3) {
-      throw Exception('Invalid token');
-    }
-    final payload = parts[1];
-    final decoded = Uri.tryParse(Uri.decodeComponent(payload))?.query;
-    if (decoded == null) {
-      throw Exception('Invalid payload');
-    }
-    final data = json.decode(decoded) as Map<String, dynamic>;
-    final exp = data['exp'] as int?;
-    if (exp == null) {
-      throw Exception('Expiration not found');
-    }
-    final expirationDate = DateTime.fromMillisecondsSinceEpoch(exp * 1000);
-    final now = DateTime.now();
-    return now.isAfter(expirationDate);
   }
 }
