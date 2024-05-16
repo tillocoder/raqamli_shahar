@@ -247,10 +247,29 @@ class CitizenAddScreen extends ConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.goNamed(Routes.activitiesAdd);
+        onPressed: () async {
+          try {
+            await ctrLocation.joylashuvniAniqlash();
+            context.goNamed(Routes.activitiesAdd);
+          } catch (e) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Xatolik'),
+                content: Text('$e'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Ok'),
+                  ),
+                ],
+              ),
+            );
+          }
         },
-        child: const Text('Next>'),
+        child: const Text('Keyingi>'),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
 import 'package:tamorqa_app/features/home/controller/home_ctr.dart';
 import 'package:tamorqa_app/features/home/view/widgets/chart_colorful_texteable.dart';
+import 'package:tamorqa_app/setup.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -15,6 +16,29 @@ class HomePage extends ConsumerWidget {
     // ignore: unused_local_variable
     var ctr = ref.read(homeController);
     return Scaffold(
+      drawer: Drawer(
+        child: DrawerHeader(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('Test User'),
+                  IconButton(
+                    onPressed: () async {
+                      box.delete('access');
+                      box.delete('refresh');
+                      context.goNamed(Routes.login);
+                    },
+                    icon: const Icon(Icons.logout),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Mahalla ijro'),

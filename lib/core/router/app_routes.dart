@@ -6,20 +6,25 @@ import 'package:tamorqa_app/features/citizens/view/pages/citizens_page.dart';
 import 'package:tamorqa_app/features/citizens_activities/view/pages/activitiy_add_screen.dart';
 import 'package:tamorqa_app/features/citizens_activities/view/pages/citizens_activities_page.dart';
 import 'package:tamorqa_app/features/home/view/pages/home_page.dart';
-import 'package:tamorqa_app/setup.dart';
+import 'package:tamorqa_app/features/splash/splash.dart';
 
 class Routing {
   static final GoRouter router = GoRouter(
-    initialLocation: box.get('access') == null ? Routes.login : Routes.home,
+    initialLocation: Routes.initial,
     debugLogDiagnostics: true,
     routes: [
+      GoRoute(
+        name: Routes.initial,
+        path: Routes.initial,
+        builder: (context, state) => const SplashPage(),
+      ),
       GoRoute(
         name: Routes.login,
         path: Routes.login,
         builder: (context, state) => const LoginPage(),
       ),
       GoRoute(
-        name: 'home',
+        name: '/home',
         path: Routes.home,
         builder: (context, state) => const HomePage(),
         routes: [

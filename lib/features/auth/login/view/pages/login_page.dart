@@ -5,6 +5,7 @@ import 'package:tamorqa_app/core/services/auth/login_ser.dart';
 import 'package:tamorqa_app/core/widgets/language_button.dart';
 import 'package:tamorqa_app/features/auth/login/controller/login_ctr.dart';
 import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
+import 'package:tamorqa_app/setup.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
@@ -24,15 +25,20 @@ class LoginPage extends ConsumerWidget {
           child: Form(
             key: ctr.formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-                Image.asset(
-                  'assets/images/herb1.png',
-                  height: 100,
+                Center(
+                  child: Image.asset(
+                    'assets/images/herb1.png',
+                    height: 100,
+                  ),
                 ),
                 const SizedBox(height: 20),
-                Text(Words.digital.tr(context)),
-                const SizedBox(height: 70),
+                Center(child: Text(Words.digital.tr(context))),
+                const SizedBox(height: 40),
+                const Text('Login'),
                 CTextField(
                   ctr: ctr.loginCtr,
                   hintString: 'Login',
@@ -46,7 +52,8 @@ class LoginPage extends ConsumerWidget {
                   },
                   maxLines: 30,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
+                const Text('Password'),
                 CTextField(
                   ctr: ctr.passwordCtr,
                   hintString: 'Password',
@@ -80,12 +87,18 @@ class LoginPage extends ConsumerWidget {
             onPressed: () async {
               bool result = ctr.formKey.currentState!.validate();
               if (result) {
-                await AuthLoginService.getToken({
-                  "username": ctr.loginCtr.text,
-                  "password": ctr.passwordCtr.text
-                }, context);
+                await AuthLoginService.getToken(
+                  {
+                    "username": ctr.loginCtr.text,
+                    "password": ctr.passwordCtr.text
+                  },
+                  context,
+                );
                 // ignore: use_build_context_synchronously
               }
+              box.put('login', ctr.loginCtr.text);
+              box.put('password', ctr.passwordCtr.text);
+              print(box.get('login'));
             },
             child: const Text(
               'Kirish',

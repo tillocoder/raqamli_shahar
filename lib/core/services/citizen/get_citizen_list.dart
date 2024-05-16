@@ -45,7 +45,6 @@ class CitizenGetListServices extends ChangeNotifier {
             'Dio Error: ${e.response?.statusCode} - ${e.response?.data}');
         if (e.response?.statusCode == 401) {
           await refreshAccessToken();
-          await getCitizenList();
         } else {
           debugPrint('Dio Error: $e');
         }
@@ -57,9 +56,8 @@ class CitizenGetListServices extends ChangeNotifier {
 
   static Future<void> refreshAccessToken() async {
     String? refreshToken = await box.get('refresh');
-    String? accessToken = await box.get('acces');
-    print(refreshToken);
-    print("Accessssssssss ss ss s ss s ss s$accessToken");
+    // String? accessToken = await box.get('acces');
+
     if (refreshToken != null) {
       try {
         var response = await dio.post(

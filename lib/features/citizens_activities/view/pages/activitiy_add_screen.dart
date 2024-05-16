@@ -7,12 +7,12 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/citizen_activity_add.dart';
 import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
+import 'package:tamorqa_app/core/widgets/dropdown_widget.dart';
 import 'package:tamorqa_app/data/entity/activities_model.dart';
 import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
 class CitizenActivitiyAdd extends ConsumerWidget {
-  // ignore: use_key_in_widget_constructors
   const CitizenActivitiyAdd({Key? key});
 
   @override
@@ -61,84 +61,37 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  children: [
-                    Expanded(
-                      child: CTextField(
-                        ctr: ctr.value,
-                        hintString: 'Qiymati',
-                        inputTypes: TextInputType.phone,
-                        validator: (value) {
-                          return null;
-                        },
-                        maxLines: 10,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: DropdownButton<int>(
-                        hint: const Text(
-                          'Yo\'nalish',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        isDense: true,
-                        borderRadius: BorderRadius.circular(15),
-                        value: ctr.direction,
-                        onChanged: (newValue) {
-                          ctr.setSelectedGender(newValue);
-                        },
-                        items: const [
-                          DropdownMenuItem<int>(
-                            value: 1,
-                            child: Text('Issiqxona'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 2,
-                            child: Text('Qo\'ziqorin Yetishtirish'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 3,
-                            child: Text('Asalarichilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 4,
-                            child: Text('Parrandachilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 5,
-                            child: Text('Uzumchilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 6,
-                            child: Text('Chorvachilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 7,
-                            child: Text('Dexqonchilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 8,
-                            child: Text('Ishlab chiqarish'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 9,
-                            child: Text('Xizmat ko\'rsatish'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 10,
-                            child: Text('Hunarmandchilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 11,
-                            child: Text('Tikuvchilik'),
-                          ),
-                          DropdownMenuItem<int>(
-                            value: 12,
-                            child: Text('Pazandachilik'),
-                          ),
-                        ],
-                      ),
-                    ),
+                CTextField(
+                  ctr: ctr.value,
+                  hintString: 'Qiymati',
+                  inputTypes: TextInputType.phone,
+                  validator: (value) {
+                    return null;
+                  },
+                  maxLines: 10,
+                ),
+                const SizedBox(height: 10),
+                DropDownWidget(
+                  text: 'Yo\'nalish',
+                  value: ctr.direction,
+                  onChanged: (newValue) {
+                    ctr.setSelectedGender(newValue);
+                  },
+                  items: const [
+                    CustomDropdownMenuItem(value: 1, text: 'Issiqxona'),
+                    CustomDropdownMenuItem(
+                        value: 2, text: 'Qo\'ziqorin Yetishtirish'),
+                    CustomDropdownMenuItem(value: 3, text: 'Asalarichilik'),
+                    CustomDropdownMenuItem(value: 4, text: 'Parrandachilik'),
+                    CustomDropdownMenuItem(value: 5, text: 'Uzumchilik'),
+                    CustomDropdownMenuItem(value: 6, text: 'Chorvachilik'),
+                    CustomDropdownMenuItem(value: 7, text: 'Dexqonchilik'),
+                    CustomDropdownMenuItem(value: 8, text: 'Ishlab chiqarish'),
+                    CustomDropdownMenuItem(
+                        value: 9, text: 'Xizmat ko\'rsatish'),
+                    CustomDropdownMenuItem(value: 10, text: 'Hunarmandchilik'),
+                    CustomDropdownMenuItem(value: 11, text: 'Tikuvchilik'),
+                    CustomDropdownMenuItem(value: 12, text: 'Pazandachilik'),
                   ],
                 ),
                 const SizedBox(height: 10),

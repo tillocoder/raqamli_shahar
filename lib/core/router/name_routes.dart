@@ -1,11 +1,9 @@
 sealed class Routes {
   Routes._();
 
-  static const String keraksiz = '/';
+  static const String initial = '/intitial';
 
   /// initial
-  static const String initial = '/';
-  static const String splash = '/splash';
   static const String onboarding = '/onboarding';
 
   /// auth login

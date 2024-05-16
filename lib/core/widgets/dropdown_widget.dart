@@ -20,7 +20,7 @@ class DropDownWidget extends StatelessWidget {
       child: InputDecorator(
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(20),
           ),
         ),
         child: DropdownButtonHideUnderline(

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -18,12 +20,12 @@ class AuthLoginService {
         var responseData = response.data as Map<String, dynamic>;
         String? accessToken = responseData["access"] as String?;
         String? refreshToken = responseData["refresh"] as String?;
+
         if (accessToken != null) {
           debugPrint("Access Token: $accessToken");
           debugPrint("Refresh Token: $refreshToken");
           await box.put('access', accessToken);
           await box.put('refresh', refreshToken);
-          // ignore: use_build_context_synchronously
           context.go(Routes.home);
         } else {
           return;
@@ -40,13 +42,5 @@ class AuthLoginService {
       debugPrint('token ololmadi tasdiqlanmagan user');
       return;
     }
-  }
-
-  static Future<String?> getAccessToken() async {
-    return box.get('access');
-  }
-
-  static Future<String?> getRefreshToken() async {
-    return box.get('refresh');
   }
 }

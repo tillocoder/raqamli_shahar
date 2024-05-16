@@ -53,3 +53,23 @@ class MyLocation extends ChangeNotifier {
     // ignore: empty_catches
   }
 }
+
+void showLocationError(BuildContext context, String errorMessage) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Joylashuv xatosi"),
+        content: Text(errorMessage),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("OK"),
+          ),
+        ],
+      );
+    },
+  );
+}
