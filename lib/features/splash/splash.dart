@@ -15,7 +15,7 @@ class SplashPage extends ConsumerWidget {
     ref.watch(splashController);
     ref.read(splashController);
     Timer(const Duration(seconds: 1), () {
-      context.goNamed(box.get('access') != null ? Routes.home : Routes.login);
+      context.goNamed(box.get('access') != null ? Routes.home : Routes.home);
     });
     return const Scaffold(
       backgroundColor: Colors.blueAccent,

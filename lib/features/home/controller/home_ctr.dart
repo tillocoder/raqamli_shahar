@@ -20,15 +20,13 @@ class HomeController extends ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    // Fetch data
     CitizenGetListServices a = CitizenGetListServices();
     await a.getCitizenList();
 
-    // Update male and female counts
     male = CitizenGetListServices.male.length;
     female = CitizenGetListServices.female.length;
 
-    isLoading = false; // Set isLoading to false after fetching data
-    notifyListeners(); // Notify listeners to update UI
+    isLoading = false;
+    notifyListeners();
   }
 }
