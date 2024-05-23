@@ -37,7 +37,7 @@ class ActivitiesController extends ChangeNotifier {
       notifyListeners();
       list = await SearchService.getData(param: paramSearchProduct(text));
       if (list != null) {
-        CitizenGetListServices.citizen = list;
+        // CitizenGetListServices.citizen = list;
         isLoading = true;
         notifyListeners();
       } else {

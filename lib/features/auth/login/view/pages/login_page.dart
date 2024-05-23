@@ -9,15 +9,15 @@ import 'package:tamorqa_app/setup.dart';
 
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(loginController);
     var ctr = ref.read(loginController);
+
     return Scaffold(
       appBar: AppBar(
-        actions: const [
-          LanguageButton(),
-        ],
+        actions: const [LanguageButton()],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -46,9 +46,8 @@ class LoginPage extends ConsumerWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter your login";
-                    } else {
-                      return null;
                     }
+                    return null;
                   },
                   maxLines: 30,
                 ),
@@ -61,9 +60,8 @@ class LoginPage extends ConsumerWidget {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter your password";
-                    } else {
-                      return null;
                     }
+                    return null;
                   },
                   maxLines: 20,
                 ),
@@ -90,15 +88,14 @@ class LoginPage extends ConsumerWidget {
                 await AuthLoginService.getToken(
                   {
                     "username": ctr.loginCtr.text,
-                    "password": ctr.passwordCtr.text
+                    "password": ctr.passwordCtr.text,
                   },
                   context,
                 );
-                // ignore: use_build_context_synchronously
               }
               box.put('login', ctr.loginCtr.text);
               box.put('password', ctr.passwordCtr.text);
-              print(box.get('login'));
+              print('Saved login: ${box.get('login')}');
             },
             child: const Text(
               'Kirish',

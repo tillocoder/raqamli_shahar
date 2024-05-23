@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/citizen/get_citizen_list.dart';
-import 'package:tamorqa_app/core/services/citizen/get_id_activities.dart';
 import 'package:tamorqa_app/features/citizens_activities/controller/activities.dart';
 
 class CitizensPage extends ConsumerWidget {
@@ -13,6 +12,8 @@ class CitizensPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(activitiesController);
     var ctr = ref.read(activitiesController);
+    var citizens = CitizenGetListServices.citizen;
+
     return Scaffold(
       appBar: AppBar(
         title: TextField(
@@ -34,9 +35,9 @@ class CitizensPage extends ConsumerWidget {
         ),
       ),
       body: ListView.builder(
-        itemCount: CitizenGetListServices.citizen.length,
+        itemCount: citizens.length,
         itemBuilder: (context, index) {
-          var item = CitizenGetListServices.citizen[index];
+          var item = citizens[index];
           return Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
             child: Card(
@@ -48,11 +49,8 @@ class CitizensPage extends ConsumerWidget {
               ),
               child: ListTile(
                 onTap: () async {
-                  ctr.citezenID = item.id;
                   debugPrint(ctr.citezenID.toString());
-                  await ActivitiesGetListServices.getactivitiesList(item.id!);
-                  // ignore: use_build_context_synchronously
-                  context.goNamed(Routes.activities);
+                  // context.goNamed(Routes.activities);
                 },
                 title: Text(item.fio),
                 subtitle: Text(
@@ -60,7 +58,7 @@ class CitizensPage extends ConsumerWidget {
                   style: const TextStyle(color: Colors.blue),
                 ),
                 trailing: Text(
-                  "${item.house.toString()} - Uy",
+                  "${item.house} - Uy",
                   style: const TextStyle(
                     color: Colors.blue,
                     fontWeight: FontWeight.w800,

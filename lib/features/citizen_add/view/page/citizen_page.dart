@@ -43,34 +43,24 @@ class CitizenAddScreen extends ConsumerWidget {
                   maxLines: 100,
                 ),
                 const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: CTextField(
-                        ctr: ctr.passportNumber,
-                        hintString: 'PASSPORT',
-                        inputTypes: TextInputType.text,
-                        validator: (value) {
-                          return null;
-                        },
-                        maxLines: 100,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: CTextField(
-                        ctr: ctr.passportNumber,
-                        hintString: 'PINFL',
-                        inputTypes: TextInputType.text,
-                        validator: (value) {
-                          return null;
-                        },
-                        maxLines: 100,
-                      ),
-                    ),
-                  ],
+                CTextField(
+                  ctr: ctr.passportNumber,
+                  hintString: 'PASSPORT',
+                  inputTypes: TextInputType.text,
+                  validator: (value) {
+                    return null;
+                  },
+                  maxLines: 100,
+                ),
+                const SizedBox(height: 10),
+                CTextField(
+                  ctr: ctr.pinflCtr,
+                  hintString: 'PINFL',
+                  inputTypes: TextInputType.text,
+                  validator: (value) {
+                    return null;
+                  },
+                  maxLines: 15,
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -78,7 +68,7 @@ class CitizenAddScreen extends ConsumerWidget {
                     Expanded(
                       flex: 2,
                       child: CTextField(
-                        ctr: ctr.passportNumber,
+                        ctr: ctr.phoneNumber,
                         hintString: 'TEL',
                         inputTypes: TextInputType.text,
                         validator: (value) {
@@ -108,32 +98,32 @@ class CitizenAddScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: CTextField(
-                        ctr: ctr.passportNumber,
+                        ctr: ctr.houseNumber,
                         hintString: 'Uy raqami',
                         inputTypes: TextInputType.text,
                         validator: (value) {
                           return null;
                         },
-                        maxLines: 100,
+                        maxLines: 4,
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: CTextField(
-                        ctr: ctr.passportNumber,
+                        ctr: ctr.birthDate,
                         hintString: 'Tug\'ulgan yil',
                         inputTypes: TextInputType.text,
                         validator: (value) {
                           return null;
                         },
-                        maxLines: 100,
+                        maxLines: 4,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 10),
                 CTextField(
-                  ctr: ctr.passportNumber,
+                  ctr: ctr.manzil,
                   hintString: 'Manzil',
                   inputTypes: TextInputType.text,
                   validator: (value) {
@@ -142,61 +132,60 @@ class CitizenAddScreen extends ConsumerWidget {
                   maxLines: 100,
                 ),
                 const SizedBox(height: 10),
-                CTextField(
-                  ctr: ctr.passportNumber,
-                  hintString: 'Lider tadbirkor',
-                  inputTypes: TextInputType.text,
-                  validator: (value) {
-                    return null;
+                DropDownWidget(
+                  text: 'Lider Tadbirkor',
+                  value: ctr.selectedHolat,
+                  onChanged: (newValue) {
+                    ctr.setConditionIjtimoiy(newValue);
                   },
-                  maxLines: 100,
+                  items: const [
+                    // CustomDropdownMenuItem(
+                    //   value: 2,
+                    //   text: 'Yordamga muhtoj',
+                    // ),
+                    // CustomDropdownMenuItem(
+                    //   value: 1,
+                    //   text: 'Yordamga muhtoj emas',
+                    // ),
+                  ],
                 ),
                 const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: DropDownWidget(
-                        text: 'Ijtimoiy holati',
-                        value: ctr.selectedHolat,
-                        onChanged: (newValue) {
-                          ctr.setConditionIjtimoiy(newValue);
-                        },
-                        items: const [
-                          CustomDropdownMenuItem(
-                            value: 2,
-                            text: 'Yordamga muhtoj',
-                          ),
-                          CustomDropdownMenuItem(
-                            value: 1,
-                            text: 'Yordamga muhtoj emas',
-                          ),
-                        ],
-                      ),
+                DropDownWidget(
+                  text: 'Ijtimoiy holati',
+                  value: ctr.selectedHolat,
+                  onChanged: (newValue) {
+                    ctr.setConditionIjtimoiy(newValue);
+                  },
+                  items: const [
+                    CustomDropdownMenuItem(
+                      value: 2,
+                      text: 'Yordamga muhtoj',
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: DropDownWidget(
-                        text: 'Bandlik holat',
-                        value: ctr.selectedBandlik,
-                        onChanged: (value) {
-                          ctr.setConditionBandlik(value);
-                        },
-                        items: const [
-                          CustomDropdownMenuItem(
-                            value: 3,
-                            text: 'Ishl bilan taminlandi',
-                          ),
-                          CustomDropdownMenuItem(
-                            value: 2,
-                            text: 'Ish joyiga ega',
-                          ),
-                          CustomDropdownMenuItem(
-                            value: 1,
-                            text: 'Ishsiz',
-                          ),
-                        ],
-                      ),
+                    CustomDropdownMenuItem(
+                      value: 1,
+                      text: 'Yordamga muhtoj emas',
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                DropDownWidget(
+                  text: 'Bandlik holat',
+                  value: ctr.selectedBandlik,
+                  onChanged: (value) {
+                    ctr.setConditionBandlik(value);
+                  },
+                  items: const [
+                    CustomDropdownMenuItem(
+                      value: 3,
+                      text: 'Ishl bilan taminlandi',
+                    ),
+                    CustomDropdownMenuItem(
+                      value: 2,
+                      text: 'Ish joyiga ega',
+                    ),
+                    CustomDropdownMenuItem(
+                      value: 1,
+                      text: 'Ishsiz',
                     ),
                   ],
                 ),

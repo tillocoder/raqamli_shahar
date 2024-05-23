@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tamorqa_app/core/services/soha_list/soha.dart';
 
 final citizenAdctr = ChangeNotifierProvider.autoDispose(
   (ref) => CitizenAddController(),
@@ -11,6 +12,7 @@ class CitizenAddController extends ChangeNotifier {
     init();
   }
 
+  TextEditingController fioCtr = TextEditingController();
   TextEditingController pinflCtr = TextEditingController();
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController houseNumber = TextEditingController();
@@ -20,8 +22,8 @@ class CitizenAddController extends ChangeNotifier {
   int? ishJoyiDarajasi;
   int? soxa;
   int? selectedHolat;
-  TextEditingController fioCtr = TextEditingController();
-  TextEditingController address = TextEditingController();
+  TextEditingController manzil = TextEditingController();
+  TextEditingController birthDate = TextEditingController();
 
   void setSelectedGender(int? newValue) {
     switch (newValue) {
@@ -53,6 +55,7 @@ class CitizenAddController extends ChangeNotifier {
     switch (newValue) {
       case 1:
         soxa = 1;
+        
         break;
       case 2:
         soxa = 2;

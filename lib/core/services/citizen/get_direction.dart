@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:tamorqa_app/core/services/app_urls/urls.dart';
-import 'package:tamorqa_app/core/services/auth/login_ser.dart';
 import 'package:tamorqa_app/core/services/base_options/base_options.dart';
 import 'package:tamorqa_app/data/entity/directios.dart';
 import 'package:tamorqa_app/setup.dart';
@@ -26,7 +25,6 @@ class DirectionGetListServices {
 
   static Future<void> refreshAccessToken() async {
     String? refreshToken = await box.get('refresh');
-    String? accessToken = await box.get('access');
     // print(refreshToken);
 
     if (refreshToken != null) {

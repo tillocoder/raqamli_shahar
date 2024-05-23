@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
@@ -14,27 +17,156 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(homeController);
-    // ignore: unused_local_variable
     var ctr = ref.read(homeController);
+    String? firstName = box.get('first_name');
+    String? region = box.get('region');
+    String? mahalla = box.get('mahalla');
+
     return Scaffold(
       drawer: Drawer(
         child: DrawerHeader(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('Test User'),
-                  IconButton(
-                    onPressed: () async {
-                      box.delete('access');
-                      box.delete('refresh');
-                      context.goNamed(Routes.login);
-                    },
-                    icon: const Icon(Icons.logout),
-                  )
-                ],
+              Card(
+                elevation: 10,
+                shadowColor: Colors.blue,
+                color: Colors.blue,
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.person,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    firstName ?? "Ism yoq ",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    "FIO",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                elevation: 10,
+                color: Colors.blue,
+                shadowColor: Colors.blue,
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.location_city_outlined,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    region ?? "shahar yoq ",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    "Shahar",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              Card(
+                elevation: 10,
+                shadowColor: Colors.blue,
+                color: Colors.blue,
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.holiday_village,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    mahalla ?? "mahalla yoq ",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  subtitle: const Text(
+                    "Mahalla",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      surfaceTintColor: Colors.white,
+                      backgroundColor: Colors.white,
+                      title: const Text("Accountdan chiqishni hohlaysizmi"),
+                      actions: [
+                        GestureDetector(
+                          onTap: () async {
+                            await box.delete("access");
+                            await box.delete("refresh");
+                            context.goNamed(Routes.login);
+                          },
+                          child: const Card(
+                            elevation: 10,
+                            shadowColor: Colors.blue,
+                            color: Colors.blue,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: 8,
+                                bottom: 8,
+                                left: 24,
+                                right: 24,
+                              ),
+                              child: Text("Ha"),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Card(
+                            elevation: 10,
+                            shadowColor: Colors.blue,
+                            color: Colors.blue,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                top: 8,
+                                bottom: 8,
+                                left: 20,
+                                right: 20,
+                              ),
+                              child: Text("Yo'q"),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                child: const Card(
+                  elevation: 10,
+                  shadowColor: Colors.red,
+                  color: Colors.red,
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("Accountdan chiqish"),
+                  ),
+                ),
               ),
             ],
           ),
@@ -153,17 +285,6 @@ class HomePage extends ConsumerWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                width: double.infinity,
-                height: 200,
-              ),
-            )
           ],
         ),
       ),

@@ -6,4 +6,7 @@ ThemeData darkTheme = ThemeData(
   colorScheme: const ColorScheme.dark(
     background: Colors.black,
   ),
+  cardTheme: const CardTheme(
+    color: Colors.black,
+  ),
 );

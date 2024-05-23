@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamorqa_app/core/services/app_urls/urls.dart';
 import 'package:tamorqa_app/core/services/base_options/base_options.dart';
 import 'package:tamorqa_app/data/entity/citizen_model.dart';
-import 'package:tamorqa_app/setup.dart';
 
 final citizenGetListServicesController =
     ChangeNotifierProvider.autoDispose((ref) => CitizenGetListServices());
@@ -15,19 +14,16 @@ class CitizenGetListServices extends ChangeNotifier {
   }
 
   static Dio dio = Dio(Baseoption.baseOptionsT);
-  static List<CitizenModel> citizen = [];
-  static List<CitizenModel> male = [];
-  static List<CitizenModel> female = [];
+  static List<Result> citizen = [];
+  static List<Result> male = [];
+  static List<Result> female = [];
 
   Future<void> getCitizenList() async {
     try {
       final response = await dio.get(Urls.apiCitizenList);
       if (response.statusCode == 200 || response.statusCode == 201) {
-        citizen = (response.data as List)
-            .map(
-              (json) => CitizenModel.fromJson(json),
-            )
-            .toList();
+        var citizenModel = CitizenModel.fromJson(response.data);
+        citizen = citizenModel.results;
         male.clear();
         female.clear();
         for (var citizen in citizen) {
@@ -44,48 +40,13 @@ class CitizenGetListServices extends ChangeNotifier {
         debugPrint(
             'Dio Error: ${e.response?.statusCode} - ${e.response?.data}');
         if (e.response?.statusCode == 401) {
-          await refreshAccessToken();
+          // Handle unauthorized error
         } else {
           debugPrint('Dio Error: $e');
         }
       } else {
         debugPrint('Exception: $e');
       }
-    }
-  }
-
-  static Future<void> refreshAccessToken() async {
-    String? refreshToken = await box.get('refresh');
-    // String? accessToken = await box.get('acces');
-
-    if (refreshToken != null) {
-      try {
-        var response = await dio.post(
-          '${Urls.baseUrl}${Urls.apiRefresh}',
-          data: {'refresh': refreshToken},
-        );
-        if (response.statusCode == 200) {
-          var responseData = response.data as Map<String, dynamic>;
-          String? accessToken = responseData["access"] as String?;
-          if (accessToken != null) {
-            debugPrint("New Access Token: $accessToken");
-            await box.put('access', accessToken);
-            // Update token in Dio instance
-            dio.options.headers["Authorization"] =
-                "Bearer ${await box.get('access')}";
-            final response = await dio.get(Urls.apiCitizenList);
-          }
-        } else {
-          debugPrint('Failed to refresh access token');
-          // Handle the failure scenario, such as showing an error message
-        }
-      } catch (e) {
-        debugPrint('Failed to refresh access token: $e');
-        // Handle the failure scenario, such as showing an error message
-      }
-    } else {
-      debugPrint('No refresh token available');
-      // Handle the scenario where there's no refresh token available
     }
   }
 }

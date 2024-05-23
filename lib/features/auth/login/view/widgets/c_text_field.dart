@@ -24,6 +24,7 @@ class CTextField extends StatelessWidget {
       child: SizedBox(
         width: isTabletOrLaptop ? 400 : width,
         child: TextField(
+          maxLength: maxLines,
           controller: ctr,
           keyboardType: inputTypes,
           decoration: InputDecoration(

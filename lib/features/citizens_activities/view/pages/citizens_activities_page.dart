@@ -12,7 +12,7 @@ class CitezensActivities extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title:  const Text('Fuqaro faoliyati'),
+        title: const Text('Fuqaro faoliyati'),
         centerTitle: true,
       ),
       body: Column(
@@ -35,42 +35,42 @@ class CitezensActivities extends ConsumerWidget {
                     case 3:
                       directionName = 'Асаларичилик';
                       break;
-              
+
                     case 4:
                       directionName = 'Паррандачилик';
                       break;
-              
+
                     case 5:
                       directionName = 'Узумчилик';
                       break;
-              
+
                     case 6:
                       directionName = 'Чорвачилик';
                       break;
-              
+
                     case 7:
                       directionName = 'Деҳқончилик';
                       break;
-              
+
                     case 8:
                       directionName = 'Ишлаб чиқариш';
-              
+
                       break;
                     case 9:
                       directionName = 'Хизмат кўрсатиш';
-              
+
                       break;
                     case 10:
                       directionName = 'Ҳунармандчилик';
-              
+
                       break;
                     case 11:
                       directionName = 'Тикувчилик';
-              
+
                       break;
                     case 12:
                       directionName = 'Пазандачилик';
-              
+
                       break;
                     default:
                       directionName = 'Unknown';
