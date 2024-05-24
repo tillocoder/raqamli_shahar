@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tamorqa_app/core/services/soha_list/soha.dart';
+import 'package:tamorqa_app/core/widgets/dropdown_widget.dart';
 
 final citizenAdctr = ChangeNotifierProvider.autoDispose(
   (ref) => CitizenAddController(),
@@ -24,74 +25,73 @@ class CitizenAddController extends ChangeNotifier {
   int? selectedHolat;
   TextEditingController manzil = TextEditingController();
   TextEditingController birthDate = TextEditingController();
+  List<CustomDropdownMenuItem> soxaItems = [];
 
   void setSelectedGender(int? newValue) {
-    switch (newValue) {
-      case 1:
-        selectedGender = 1;
-        break;
-      case 2:
-        selectedGender = 2;
-        break;
-    }
+    selectedGender = newValue;
     debugPrint(selectedGender.toString());
     notifyListeners();
   }
 
   void setConditionIjtimoiy(int? holatValue) {
-    switch (holatValue) {
-      case 1:
-        selectedHolat = 1;
-        break;
-      case 2:
-        selectedHolat = 2;
-        break;
-    }
+    selectedHolat = holatValue;
     debugPrint(holatValue.toString());
     notifyListeners();
   }
 
-  void setSoxa(int? newValue) {
-    switch (newValue) {
-      case 1:
-        soxa = 1;
-        SohaGetListServices().getSoxaListFunction();
-        break;
-      case 2:
-        soxa = 2;
-        break;
+  Future<void> setSoxa(int? newValue) async {
+    soxa = newValue;
+    if (soxa == 1) {
+      await fetchSoxaItems();
+
+      yonalish = 1;
+    } else if (soxa == 2) {
+      await fetchSoxaItems();
+
+      yonalish = 2;
     }
-    debugPrint(newValue.toString());
+    debugPrint(soxa.toString());
     notifyListeners();
   }
 
   void setConditionBandlik(int? bandlikValue) {
-    switch (bandlikValue) {
-      case 1:
-        selectedBandlik = 1;
-        break;
-      case 2:
-        selectedBandlik = 2;
-        break;
-      case 3:
-        selectedBandlik = 3;
-        break;
-    }
+    selectedBandlik = bandlikValue;
     debugPrint(selectedBandlik.toString());
     notifyListeners();
   }
 
   void setIshjoyiDarajasi(int? ishJoyiDarajasiValue) {
-    switch (ishJoyiDarajasiValue) {
-      case 1:
-        ishJoyiDarajasi = 1;
-        break;
-      case 2:
-        ishJoyiDarajasi = 2;
-        break;
-    }
+    ishJoyiDarajasi = ishJoyiDarajasiValue;
     debugPrint(ishJoyiDarajasi.toString());
     notifyListeners();
+  }
+
+  Future<void> fetchSoxaItems() async {
+    try {
+      SohaGetListServices sohaService = SohaGetListServices();
+      await sohaService.getSoxaListFunction(yonalish);
+
+      // Clear existing items to avoid duplication
+      soxaItems.clear();
+
+      // Use a Set to ensure uniqueness
+      Set<int> uniqueIds = {};
+
+      // Iterate through the response and add unique IDs to the Set
+      sohaService.soxaList.forEach((soxa) {
+        if (!uniqueIds.contains(soxa.id)) {
+          uniqueIds.add(soxa.id);
+          soxaItems.add(
+            CustomDropdownMenuItem(
+              value: soxa.id,
+              text: soxa.name,
+            ),
+          );
+        }
+      });
+    } catch (error) {
+      debugPrint("Error fetching soxa items: $error");
+    }
   }
 
   void init() async {
@@ -100,7 +100,6 @@ class CitizenAddController extends ChangeNotifier {
     try {
       isLoading = false;
     } catch (error) {
-      // ignore: avoid_print
       print("Error occurred: $error");
       isLoading = false;
     }

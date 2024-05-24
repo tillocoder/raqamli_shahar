@@ -9,7 +9,12 @@ class LanguageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-      icon: const Text('🌐 Language ▼'),
+      icon: const Text(
+        '🌐 Language ▼',
+        style: TextStyle(
+          color: Colors.black,
+        ),
+      ),
       itemBuilder: (context) => [
         const PopupMenuItem(
           value: 1,

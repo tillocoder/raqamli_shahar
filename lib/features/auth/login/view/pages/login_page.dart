@@ -36,9 +36,21 @@ class LoginPage extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Center(child: Text(Words.digital.tr(context))),
+                Center(
+                  child: Text(
+                    Words.digital.tr(context),
+                    style: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 40),
-                const Text('Login'),
+                const Text(
+                  'Login',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
                 CTextField(
                   ctr: ctr.loginCtr,
                   hintString: 'Login',
@@ -50,9 +62,14 @@ class LoginPage extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 30,
+                  obsecure: false,
                 ),
-                const SizedBox(height: 20),
-                const Text('Password'),
+                const Text(
+                  'Password',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
                 CTextField(
                   ctr: ctr.passwordCtr,
                   hintString: 'Password',
@@ -64,6 +81,7 @@ class LoginPage extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 20,
+                  obsecure: true,
                 ),
               ],
             ),

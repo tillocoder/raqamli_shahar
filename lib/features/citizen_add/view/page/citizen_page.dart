@@ -7,13 +7,11 @@ import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
 import 'package:tamorqa_app/core/services/soha_list/soha.dart';
 import 'package:tamorqa_app/core/widgets/dropdown_widget.dart';
-import 'package:tamorqa_app/data/entity/soxa_model.dart';
 import 'package:tamorqa_app/features/auth/login/view/widgets/c_text_field.dart';
 import 'package:tamorqa_app/features/citizen_add/controller/citizen_add_ctr.dart';
 import 'package:tamorqa_app/features/citizen_add/controller/golocator.dart';
 
 class CitizenAddScreen extends ConsumerWidget {
-  // ignore: use_key_in_widget_constructors
   const CitizenAddScreen({Key? key});
 
   @override
@@ -21,9 +19,9 @@ class CitizenAddScreen extends ConsumerWidget {
     ref.watch(citizenAdctr);
     ref.watch(mylocationController);
     ref.watch(soxaGetService);
-
     var ctr = ref.read(citizenAdctr);
     var ctrLocation = ref.read(mylocationController);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -45,6 +43,7 @@ class CitizenAddScreen extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 100,
+                  obsecure: false,
                 ),
                 const SizedBox(height: 10),
                 CTextField(
@@ -55,6 +54,7 @@ class CitizenAddScreen extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 100,
+                  obsecure: false,
                 ),
                 const SizedBox(height: 10),
                 CTextField(
@@ -65,6 +65,7 @@ class CitizenAddScreen extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 15,
+                  obsecure: false,
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -79,6 +80,7 @@ class CitizenAddScreen extends ConsumerWidget {
                           return null;
                         },
                         maxLines: 100,
+                        obsecure: false,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -109,6 +111,7 @@ class CitizenAddScreen extends ConsumerWidget {
                           return null;
                         },
                         maxLines: 4,
+                        obsecure: false,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -121,6 +124,7 @@ class CitizenAddScreen extends ConsumerWidget {
                           return null;
                         },
                         maxLines: 4,
+                        obsecure: false,
                       ),
                     ),
                   ],
@@ -134,6 +138,7 @@ class CitizenAddScreen extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 100,
+                  obsecure: false,
                 ),
                 const SizedBox(height: 10),
                 DropDownWidget(
@@ -142,16 +147,7 @@ class CitizenAddScreen extends ConsumerWidget {
                   onChanged: (newValue) {
                     ctr.setConditionIjtimoiy(newValue);
                   },
-                  items: const [
-                    CustomDropdownMenuItem(
-                      value: 2,
-                      text: 'Yordamga muhtoj',
-                    ),
-                    CustomDropdownMenuItem(
-                      value: 1,
-                      text: 'Yordamga muhtoj emas',
-                    ),
-                  ],
+                  items: const [],
                 ),
                 const SizedBox(height: 10),
                 Card(
@@ -187,7 +183,7 @@ class CitizenAddScreen extends ConsumerWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
                         Visibility(
                           visible: ctr.selectedBandlik == 2,
                           child: Column(
@@ -209,12 +205,12 @@ class CitizenAddScreen extends ConsumerWidget {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 20),
+                              const SizedBox(height: 10),
                               DropDownWidget(
-                                text: 'Soxasi',
+                                text: 'Soxa',
                                 value: ctr.soxa,
-                                onChanged: (value) {
-                                  ctr.setSoxa(value);
+                                onChanged: (value) async {
+                                  await ctr.setSoxa(value);
                                 },
                                 items: const [
                                   CustomDropdownMenuItem(
@@ -226,6 +222,15 @@ class CitizenAddScreen extends ConsumerWidget {
                                     text: 'Iqtisodiy',
                                   ),
                                 ],
+                              ),
+                              const SizedBox(height: 10),
+                              DropDownWidget(
+                                text: 'Tanlang',
+                                value: ctr.soxa,
+                                onChanged: (value) async {
+                                  await ctr.setSoxa(value);
+                                },
+                                items: ctr.soxaItems,
                               ),
                             ],
                           ),

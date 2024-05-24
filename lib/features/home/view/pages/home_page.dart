@@ -271,7 +271,13 @@ class HomePage extends ConsumerWidget {
                                     'tel:+998330007800',
                                   );
                                 },
-                                title: const Text("33 000 78 00"),
+                                title: const Text(
+                                  "33 000 78 00",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18,
+                                  ),
+                                ),
                               ),
                             ),
                           ),

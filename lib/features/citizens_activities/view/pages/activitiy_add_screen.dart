@@ -44,6 +44,7 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                           return null;
                         },
                         maxLines: 10,
+                        obsecure: false,
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -56,6 +57,7 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                           return null;
                         },
                         maxLines: 14,
+                        obsecure: false,
                       ),
                     ),
                   ],
@@ -69,6 +71,7 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 10,
+                  obsecure: false,
                 ),
                 const SizedBox(height: 10),
                 DropDownWidget(
@@ -103,6 +106,7 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 100,
+                  obsecure: false,
                 ),
                 const SizedBox(height: 10),
                 CTextField(
@@ -113,6 +117,7 @@ class CitizenActivitiyAdd extends ConsumerWidget {
                     return null;
                   },
                   maxLines: 100,
+                  obsecure: false,
                 ),
               ],
             ),

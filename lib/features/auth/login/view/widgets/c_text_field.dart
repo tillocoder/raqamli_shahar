@@ -6,6 +6,7 @@ class CTextField extends StatelessWidget {
   final TextInputType inputTypes;
   final double width;
   final int maxLines;
+  final bool obsecure;
 
   const CTextField({
     super.key,
@@ -14,6 +15,7 @@ class CTextField extends StatelessWidget {
     required this.inputTypes,
     this.width = double.infinity,
     required this.maxLines,
+    required this.obsecure,
     required String? Function(dynamic value) validator,
   });
 
@@ -24,6 +26,8 @@ class CTextField extends StatelessWidget {
       child: SizedBox(
         width: isTabletOrLaptop ? 400 : width,
         child: TextField(
+          obscureText: obsecure,
+          obscuringCharacter: "•",
           maxLength: maxLines,
           controller: ctr,
           keyboardType: inputTypes,
