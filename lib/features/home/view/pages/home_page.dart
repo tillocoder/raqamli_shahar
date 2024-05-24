@@ -1,7 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tamorqa_app/core/router/name_routes.dart';
@@ -223,7 +221,7 @@ class HomePage extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 width: double.infinity,
-                height: 170,
+                height: 190,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -251,31 +249,30 @@ class HomePage extends ConsumerWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              await launchUrlString(
-                                'https://t.me/+IXb5d2DW5IozZWIy',
-                              );
-                            },
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Icon(Icons.telegram),
-                                Text('  Telegram'),
-                              ],
+                          Expanded(
+                            child: Card(
+                              child: ListTile(
+                                title: const Icon(Icons.telegram),
+                                onTap: () async {
+                                  await launchUrlString(
+                                    'https://t.me/+IXb5d2DW5IozZWIy',
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () async {
-                              await launchUrlString(
-                                'tel:+998330007800',
-                              );
-                            },
-                            child: const Row(
-                              children: [
-                                Icon(Icons.phone),
-                                Text('  33 000 78 00'),
-                              ],
+                          Expanded(
+                            flex: 4,
+                            child: Card(
+                              child: ListTile(
+                                leading: const Icon(Icons.phone),
+                                onTap: () async {
+                                  await launchUrlString(
+                                    'tel:+998330007800',
+                                  );
+                                },
+                                title: const Text("33 000 78 00"),
+                              ),
                             ),
                           ),
                         ],

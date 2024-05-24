@@ -55,7 +55,7 @@ class CitizenAddController extends ChangeNotifier {
     switch (newValue) {
       case 1:
         soxa = 1;
-        
+        SohaGetListServices().getSoxaListFunction();
         break;
       case 2:
         soxa = 2;
